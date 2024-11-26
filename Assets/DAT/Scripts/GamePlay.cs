@@ -4,18 +4,11 @@ using UnityEngine;
 
 namespace DAT.NPCTaisen
 {
-    public class GamePlay : MonoBehaviour
+    /// <summary>
+    /// ゲームプレイを管理。
+    /// </summary>
+    public class GamePlay : SceneBehaviourBase
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
     }
 }

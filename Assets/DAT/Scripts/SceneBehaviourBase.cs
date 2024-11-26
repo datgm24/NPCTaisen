@@ -7,9 +7,9 @@ namespace DAT.NPCTaisen
     /// </summary>
     public class SceneBehaviourBase : MonoBehaviour, ISceneBehaviour
     {
-        GameSystem gameSystem;
+        protected GameSystem gameSystem;
 
-        public void StartScene(GameSystem instance)
+        public virtual void StartScene(GameSystem instance)
         {
             gameSystem = instance;
         }
