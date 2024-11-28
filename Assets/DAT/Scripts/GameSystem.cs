@@ -35,12 +35,6 @@ namespace DAT.NPCTaisen
 
         AsyncOperation asyncOperation;
 
-        private void Start()
-        {
-            // TODO 試し
-            var sceneBehaviours = GameObject.FindObjectsOfType<SceneBehaviourBase>();
-        }
-
         private void Update()
         {
             InitState();
