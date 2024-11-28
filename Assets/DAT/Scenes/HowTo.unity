@@ -1140,6 +1140,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1455701377}
+  - component: {fileID: 1455701379}
   - component: {fileID: 1455701376}
   - component: {fileID: 1455701375}
   - component: {fileID: 1455701374}
@@ -1254,6 +1255,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1455701379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455701373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e0a89ed14e5e948959fef9221ad401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animated:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1351236399}
+        m_TargetAssemblyTypeName: DAT.NPCTaisen.HowTo, Assembly-CSharp
+        m_MethodName: AnimationDone
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1603113765
 GameObject:
   m_ObjectHideFlags: 0

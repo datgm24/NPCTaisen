@@ -44,6 +44,7 @@ namespace DAT.NPCTaisen
         private void Update()
         {
             InitState();
+            UpdateState();
         }
 
         void InitState()
