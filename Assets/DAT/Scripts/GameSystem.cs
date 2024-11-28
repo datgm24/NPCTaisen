@@ -10,7 +10,7 @@ namespace DAT.NPCTaisen
     /// </summary>
     public class GameSystem : MonoBehaviour
     {
-        enum State
+        public enum State
         {
             None = -1,
             Boot,
@@ -45,6 +45,15 @@ namespace DAT.NPCTaisen
         {
             InitState();
             UpdateState();
+        }
+
+        /// <summary>
+        /// 次のゲーム全体の状態を設定する。
+        /// </summary>
+        /// <param name="state">GameSystem.Stateで定義された状態</param>
+        public void SetNextState(State state)
+        {
+            nextState = state;
         }
 
         void InitState()

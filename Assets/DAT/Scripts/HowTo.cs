@@ -17,7 +17,8 @@ namespace DAT.NPCTaisen
             None = -1,
             Hided,
             HowTo,
-            Credits
+            Credits,
+            GameStart,
         }
 
         State currentState = State.None;
@@ -65,12 +66,17 @@ namespace DAT.NPCTaisen
                     animator.SetInteger("State", (int)State.Credits);
                     isAnimating = true;
                     break;
+
+                case State.GameStart:
+                    animator.SetInteger("State", (int)State.Hided);
+                    isAnimating = true;
+                    break;
             }
         }
 
         void UpdateState()
         {
-            switch(currentState)
+            switch (currentState)
             {
                 case State.HowTo:
                     UpdateHowTo();
@@ -78,6 +84,10 @@ namespace DAT.NPCTaisen
 
                 case State.Credits:
                     UpdateCredits();
+                    break;
+
+                case State.GameStart:
+                    UpdateGameStart();
                     break;
             }
         }
@@ -93,6 +103,10 @@ namespace DAT.NPCTaisen
             {
                 nextState = State.Credits;
             }
+            else if (Input.GetButtonDown("Start"))
+            {
+                nextState = State.GameStart;
+            }
         }
 
         void UpdateCredits()
@@ -106,6 +120,16 @@ namespace DAT.NPCTaisen
             {
                 nextState = State.HowTo;
             }
+        }
+
+        void UpdateGameStart()
+        {
+            if (isAnimating)
+            {
+                return;
+            }
+
+            gameSystem.SetNextState(GameSystem.State.GamePlay);
         }
     }
 }
