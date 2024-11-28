@@ -60,6 +60,11 @@ namespace DAT.NPCTaisen
                     animator.SetInteger("State", (int)State.HowTo);
                     isAnimating = true;
                     break;
+
+                case State.Credits:
+                    animator.SetInteger("State", (int)State.Credits);
+                    isAnimating = true;
+                    break;
             }
         }
 
@@ -70,6 +75,10 @@ namespace DAT.NPCTaisen
                 case State.HowTo:
                     UpdateHowTo();
                     break;
+
+                case State.Credits:
+                    UpdateCredits();
+                    break;
             }
         }
 
@@ -78,6 +87,24 @@ namespace DAT.NPCTaisen
             if (isAnimating)
             {
                 return;
+            }
+
+            if (Input.GetButtonDown("Credits"))
+            {
+                nextState = State.Credits;
+            }
+        }
+
+        void UpdateCredits()
+        {
+            if (isAnimating)
+            {
+                return;
+            }
+
+            if (Input.GetButtonDown("Cancel"))
+            {
+                nextState = State.HowTo;
             }
         }
     }
