@@ -84,7 +84,7 @@ namespace DAT.NPCTaisen
             }
 
             currentState = State.Hided;
-            gameSystem.SetNextState(GameSystem.State.HowTo);
+            gameSystem.SetNextState(GameSystem.State.Reboot);
         }
     }
 }

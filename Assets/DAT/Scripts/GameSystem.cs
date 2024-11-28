@@ -20,6 +20,7 @@ namespace DAT.NPCTaisen
             Result2P,
             ResultDraw,
             Started,    // シーンを開始したら、この状態へ
+            Reboot,
         }
 
         static string HowToSceneName => "HowTo";
@@ -81,6 +82,10 @@ namespace DAT.NPCTaisen
                 case State.GamePlay:
                     SceneManager.UnloadSceneAsync(HowToSceneName);
                     gamePlay.StartScene(this);
+                    break;
+
+                case State.Reboot:
+                    SceneManager.LoadScene(GamePlaySceneName);
                     break;
             }
         }
