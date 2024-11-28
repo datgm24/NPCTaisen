@@ -79,6 +79,11 @@ namespace DAT.NPCTaisen
                 case State.Result:
                     asyncOperation = SceneManager.LoadSceneAsync(ResultSceneName, LoadSceneMode.Additive);
                     break;
+
+                case State.GamePlay:
+                    SceneManager.UnloadSceneAsync(HowToSceneName);
+                    gamePlay.StartScene(this);
+                    break;
             }
         }
 

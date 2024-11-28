@@ -9,6 +9,11 @@ namespace DAT.NPCTaisen
     /// </summary>
     public class GamePlay : SceneBehaviourBase
     {
+        public override void StartScene(GameSystem instance)
+        {
+            base.StartScene(instance);
 
+            Debug.Log($"ゲーム開始");
+        }
     }
 }
