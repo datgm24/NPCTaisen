@@ -16,7 +16,9 @@ namespace DAT.NPCTaisen
             Boot,
             HowTo,
             GamePlay,
-            Result,
+            Result1P,
+            Result2P,
+            ResultDraw,
             Started,    // シーンを開始したら、この状態へ
         }
 
@@ -24,7 +26,7 @@ namespace DAT.NPCTaisen
         static string GamePlaySceneName => "GamePlay";
         static string ResultSceneName => "Result";
 
-        State currentState = State.None;
+        public State CurrentState { get; private set; } = State.None;
         State nextState = State.Boot;
 
         /// <summary>
@@ -56,10 +58,10 @@ namespace DAT.NPCTaisen
             {
                 return;
             }
-            currentState = nextState;
+            CurrentState = nextState;
             nextState = State.None;
 
-            switch (currentState)
+            switch (CurrentState)
             {
                 case State.Boot:
                     gamePlay = GameObject.FindObjectOfType<GamePlay>();
@@ -70,7 +72,9 @@ namespace DAT.NPCTaisen
                     asyncOperation = SceneManager.LoadSceneAsync(HowToSceneName, LoadSceneMode.Additive);
                     break;
 
-                case State.Result:
+                case State.Result1P:
+                case State.Result2P:
+                case State.ResultDraw:
                     asyncOperation = SceneManager.LoadSceneAsync(ResultSceneName, LoadSceneMode.Additive);
                     break;
 
@@ -83,10 +87,12 @@ namespace DAT.NPCTaisen
 
         void UpdateState()
         {
-            switch (currentState)
+            switch (CurrentState)
             {
                 case State.HowTo:
-                case State.Result:
+                case State.Result1P:
+                case State.Result2P:
+                case State.ResultDraw:
                     WaitSceneLoaded();
                     break;
             }
@@ -113,6 +119,7 @@ namespace DAT.NPCTaisen
 
                 // シーンを開始
                 sceneBehaviours[i].StartScene(this);
+                break;
             }
 
             nextState = State.Started;

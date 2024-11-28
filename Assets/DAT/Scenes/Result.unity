@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 469096226}
+  - component: {fileID: 469096228}
   - component: {fileID: 469096225}
   - component: {fileID: 469096224}
   - component: {fileID: 469096223}
@@ -246,6 +247,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &469096228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469096222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e0a89ed14e5e948959fef9221ad401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animated:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1888351134}
+        m_TargetAssemblyTypeName: DAT.NPCTaisen.Result, Assembly-CSharp
+        m_MethodName: OnAnimated
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1290452439
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +332,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- ANY KEY TO NEXT -'
+  m_text: '- [SPACE] KEY TO NEXT -'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1963bafab3b8b1044b9d74bf27cd1bac, type: 2}
   m_sharedMaterial: {fileID: -7965901079657525643, guid: 1963bafab3b8b1044b9d74bf27cd1bac, type: 2}
@@ -545,6 +573,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be4b93dca2bfec944913a991c3eb265f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resultText: {fileID: 1375818232}
+  animator: {fileID: 469096227}
 --- !u!4 &1888351135
 Transform:
   m_ObjectHideFlags: 0
