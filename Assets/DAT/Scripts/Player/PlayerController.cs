@@ -16,6 +16,7 @@ namespace DAT.NPCTaisen
             Play,
             Win,
             Lose,
+            Draw,
         }
 
         /// <summary>
