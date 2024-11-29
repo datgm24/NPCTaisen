@@ -489,6 +489,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6477587123312272394}
   - component: {fileID: 9123851920434109920}
+  - component: {fileID: 175373017253491860}
   - component: {fileID: 6477587123312272388}
   - component: {fileID: 6477587123312272389}
   m_Layer: 0
@@ -525,6 +526,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cd4b0206d9ff0f4e8c84ec06295bfb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlType: 0
+  attackables:
+  - {fileID: 6245104676583185751, guid: de548bf08b637b44ca4b0d9303bd94cb, type: 3}
+  - {fileID: 8505234737582350764, guid: dd4f2c0b723f5bd43b0a6a085922a6bd, type: 3}
+--- !u!114 &175373017253491860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6477587123312272395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c86693cd538c324aaf4fe8da78f4b00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!54 &6477587123312272388

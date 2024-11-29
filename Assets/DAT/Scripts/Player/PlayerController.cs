@@ -31,8 +31,11 @@ namespace DAT.NPCTaisen
         [SerializeField]
         ControlType controlType =ControlType.P1;
 
+        [SerializeField, Tooltip("攻撃を2つ設定する。")]
+        AttackableBase [] attackables = new AttackableBase[2];
+
         State currentState = State.None;
-        State nextState = State.None;
+        State nextState = State.Standby;
 
         ITaisenInput[] inputs =
         {
@@ -40,6 +43,15 @@ namespace DAT.NPCTaisen
             new InputToAction2P(),
             null
         };
+
+        IMoveable moveable = null;
+
+        GamePlay gamePlay = null;
+
+        private void Awake()
+        {
+            moveable = GetComponent<IMoveable>();
+        }
 
         private void Update()
         {
@@ -50,9 +62,10 @@ namespace DAT.NPCTaisen
         /// <summary>
         /// ゲームがはじまったら、GamePlayから、このメソッドを呼び出す。
         /// </summary>
-        public void StartPlay()
+        public void StartPlay(GamePlay play)
         {
             nextState = State.Play;
+            gamePlay = play;
         }
 
         void InitState()
@@ -73,7 +86,19 @@ namespace DAT.NPCTaisen
         {
             switch (currentState)
             {
+                case State.Play:
+                    UpdatePlay();
+                    break;
             }
+        }
+
+        /// <summary>
+        /// 操作の更新処理
+        /// </summary>
+        void UpdatePlay()
+        {
+            // 入力からアクションを実行させる
+            inputs[(int)controlType].InputToAction(moveable, attackables);
         }
 
     }

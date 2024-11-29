@@ -35,8 +35,7 @@ namespace DAT.NPCTaisen
         {
             base.StartScene(instance);
 
-            int index = gameSystem.CurrentState - GameSystem.State.Result1P;
-            resultText.text = ResultText[index];
+            resultText.text = ResultText[(int)gameSystem.GameResult];
 
             currentState = State.Show;
             animator.SetBool("Show", true);

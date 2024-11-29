@@ -16,9 +16,7 @@ namespace DAT.NPCTaisen
             Boot,
             HowTo,
             GamePlay,
-            Result1P,
-            Result2P,
-            ResultDraw,
+            Result,
             Started,    // シーンを開始したら、この状態へ
             Reboot,
         }
@@ -29,6 +27,11 @@ namespace DAT.NPCTaisen
 
         public State CurrentState { get; private set; } = State.None;
         State nextState = State.Boot;
+
+        /// <summary>
+        /// ゲームの勝敗
+        /// </summary>
+        public IPlayResult.State GameResult { get; private set; }
 
         /// <summary>
         /// ゲームプレイを管理するシーンクラスのインスタンス。
@@ -53,6 +56,16 @@ namespace DAT.NPCTaisen
             nextState = state;
         }
 
+        /// <summary>
+        /// 勝敗を受け取って、結果へ遷移する。
+        /// </summary>
+        /// <param name="result">IPlayResult.Stateの結果</param>
+        public void SetResult(IPlayResult.State result)
+        {
+            GameResult = result;
+            SetNextState(State.Result);
+        }
+
         void InitState()
         {
             if (nextState == State.None)
@@ -73,9 +86,7 @@ namespace DAT.NPCTaisen
                     asyncOperation = SceneManager.LoadSceneAsync(HowToSceneName, LoadSceneMode.Additive);
                     break;
 
-                case State.Result1P:
-                case State.Result2P:
-                case State.ResultDraw:
+                case State.Result:
                     asyncOperation = SceneManager.LoadSceneAsync(ResultSceneName, LoadSceneMode.Additive);
                     break;
 
@@ -95,9 +106,7 @@ namespace DAT.NPCTaisen
             switch (CurrentState)
             {
                 case State.HowTo:
-                case State.Result1P:
-                case State.Result2P:
-                case State.ResultDraw:
+                case State.Result:
                     WaitSceneLoaded();
                     break;
             }

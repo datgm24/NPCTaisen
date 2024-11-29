@@ -7,7 +7,7 @@ namespace DAT.NPCTaisen
     /// <summary>
     /// 攻撃用インターフェース
     /// </summary>
-    public interface IAttack
+    public interface IAttackable
     {
         /// <summary>
         /// 攻撃する。

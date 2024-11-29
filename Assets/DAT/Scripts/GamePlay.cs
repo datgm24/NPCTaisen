@@ -9,7 +9,7 @@ namespace DAT.NPCTaisen
     /// <summary>
     /// ゲームプレイを管理。
     /// </summary>
-    public class GamePlay : SceneBehaviourBase
+    public class GamePlay : SceneBehaviourBase, IPlayResult
     {
         enum State
         {
@@ -35,6 +35,16 @@ namespace DAT.NPCTaisen
             UpdateState();
         }
 
+    /// <summary>
+    /// ゲームの勝敗を受け取る。
+    /// </summary>
+    /// <param name="state">IPlayResult.Stateで受け取る</param>
+        public void SetResult(IPlayResult.State state)
+        {
+            nextState = State.ToResult;
+            gameSystem.SetResult(state);
+        }
+
         void InitState()
         {
             if (nextState == State.None)
@@ -46,10 +56,26 @@ namespace DAT.NPCTaisen
 
             switch (currentState)
             {
+                case State.GamePlay:
+                    InitGamePlay();
+                    break;
+
                 case State.ToResult:
                     break;
             }
 
+        }
+
+        /// <summary>
+        /// ゲーム開始時の処理。
+        /// </summary>
+        void InitGamePlay()
+        {
+            var players = GameObject.FindObjectsOfType<PlayerController>();
+            foreach (var player in players)
+            {
+                player.StartPlay(this);
+            }
         }
 
         void UpdateState()
@@ -67,18 +93,15 @@ namespace DAT.NPCTaisen
         {
             if (Input.GetButtonDown("Debug1PWin"))
             {
-                nextState = State.ToResult;
-                gameSystem.SetNextState(GameSystem.State.Result1P);
+                SetResult(IPlayResult.State.Win1P);
             }
             if (Input.GetButtonDown("Debug2PWin"))
             {
-                nextState = State.ToResult;
-                gameSystem.SetNextState(GameSystem.State.Result2P);
+                SetResult(IPlayResult.State.Win2P);
             }
             if (Input.GetButtonDown("DebugDraw"))
             {
-                nextState = State.ToResult;
-                gameSystem.SetNextState(GameSystem.State.ResultDraw);
+                SetResult(IPlayResult.State.Draw);
             }
         }
     }
