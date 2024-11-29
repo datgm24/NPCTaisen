@@ -9,8 +9,7 @@ namespace DAT.NPCTaisen
     {
         static readonly string[] ResultText =
         {
-            "1P WIN!!",
-            "2P WIN!!",
+            " WIN!!",
             "DRAW"
         };
 
@@ -35,7 +34,7 @@ namespace DAT.NPCTaisen
         {
             base.StartScene(instance);
 
-            resultText.text = ResultText[(int)gameSystem.GameResult];
+            resultText.text = $"{instance.Winner}{ResultText[(int)gameSystem.GameResult]}";
 
             currentState = State.Show;
             animator.SetBool("Show", true);

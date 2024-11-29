@@ -529,6 +529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controlType: 0
+  playerName: Player1
   attackables:
   - {fileID: 6245104676583185751, guid: de548bf08b637b44ca4b0d9303bd94cb, type: 3}
   - {fileID: 8505234737582350764, guid: dd4f2c0b723f5bd43b0a6a085922a6bd, type: 3}

@@ -21,6 +21,15 @@ namespace DAT.NPCTaisen
             Reboot,
         }
 
+        /// <summary>
+        /// 勝負の有無
+        /// </summary>
+        public enum GameResultType
+        {
+            WinLose,
+            Draw
+        }
+
         static string HowToSceneName => "HowTo";
         static string GamePlaySceneName => "GamePlay";
         static string ResultSceneName => "Result";
@@ -31,7 +40,12 @@ namespace DAT.NPCTaisen
         /// <summary>
         /// ゲームの勝敗
         /// </summary>
-        public IPlayResult.State GameResult { get; private set; }
+        public GameResultType GameResult { get; private set; }
+
+        /// <summary>
+        /// 勝者の名前。引き分けのときは空文字。
+        /// </summary>
+        public string Winner { get; private set; } = "";
 
         /// <summary>
         /// ゲームプレイを管理するシーンクラスのインスタンス。
@@ -60,9 +74,10 @@ namespace DAT.NPCTaisen
         /// 勝敗を受け取って、結果へ遷移する。
         /// </summary>
         /// <param name="result">IPlayResult.Stateの結果</param>
-        public void SetResult(IPlayResult.State result)
+        public void SetResult(GameResultType result, string winner = "")
         {
             GameResult = result;
+            Winner = winner;
             SetNextState(State.Result);
         }
 
