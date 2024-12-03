@@ -19,6 +19,7 @@ namespace DAT.NPCTaisen
             HowTo,
             Credits,
             GameStart,
+            GameStarted,
         }
 
         State currentState = State.None;
@@ -130,6 +131,7 @@ namespace DAT.NPCTaisen
             }
 
             gameSystem.SetNextState(GameSystem.State.GamePlay);
+            nextState = State.GameStarted;
         }
     }
 }
