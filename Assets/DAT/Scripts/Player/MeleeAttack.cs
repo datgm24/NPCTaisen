@@ -9,9 +9,20 @@ namespace DAT.NPCTaisen
     /// </summary>
     public class MeleeAttack : AttackableBase
     {
-        public override void Attack()
+        public override bool Attack(IMovable from)
         {
+            if (!base.Attack(from))
+            {
+                return false;
+            }
+
             Debug.Log($"melee");
+            return true;
+        }
+
+        protected override void OnHit()
+        {
+            Debug.Log($"近接ヒット");
         }
     }
 }

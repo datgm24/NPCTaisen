@@ -18,11 +18,11 @@ namespace DAT.NPCTaisen
 
             if (Input.GetButtonDown("Melee1P"))
             {
-                attacks[0].Attack();
+                attacks[0].Attack(move);
             }
             if (Input.GetButtonDown("Range1P"))
             {
-                attacks[1].Attack();
+                attacks[1].Attack(move);
             }
         }
     }
