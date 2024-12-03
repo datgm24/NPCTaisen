@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DAT.NPCTaisen
 {
-    public interface IMoveable
+    public interface IMovable
     {
         /// <summary>
         /// 移動方向を受け取るので、自分の速度で移動する。

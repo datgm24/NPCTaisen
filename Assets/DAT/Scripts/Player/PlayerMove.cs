@@ -5,7 +5,7 @@ namespace DAT.NPCTaisen
     /// <summary>
     /// プレイヤーを移動させるクラス。
     /// </summary>
-    public class PlayerMove : MonoBehaviour, IMoveable
+    public class PlayerMove : MonoBehaviour, IMovable
     {
         [SerializeField]
         float speed = 4f;

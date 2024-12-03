@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace DAT.NPCTaisen
 {
     /// <summary>
-    /// 勝ったことを知らせるためのインターフェース
+    /// 負けたことを知らせるためのインターフェース
     /// </summary>
-    public interface IWinReportable
+    public interface ILoseReportable
     {
         /// <summary>
-        /// 勝ったことを知らせる。
+        /// 負けたことを知らせる。
         /// </summary>
         /// <param name="player">自分のインスタンスを渡す</param>
-        void ReportWin(PlayerController player);
+        void ReportLose(PlayerController player);
     }
 }

@@ -9,7 +9,7 @@ namespace DAT.NPCTaisen
     /// </summary>
     public class InputToAction1P : ITaisenInput
     {
-        public void InputToAction(IMoveable move, IAttackable[] attacks)
+        public void InputToAction(IMovable move, IAttackable[] attacks)
         {
             Vector2 inputMove = Vector2.zero;
             inputMove.x = Input.GetAxisRaw("Horizontal1P");

@@ -53,13 +53,13 @@ namespace DAT.NPCTaisen
             null
         };
 
-        IMoveable moveable = null;
+        IMovable moveable = null;
 
         GamePlay gamePlay = null;
 
         private void Awake()
         {
-            moveable = GetComponent<IMoveable>();
+            moveable = GetComponent<IMovable>();
         }
 
         private void Update()

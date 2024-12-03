@@ -9,7 +9,7 @@ namespace DAT.NPCTaisen
     /// <summary>
     /// ゲームプレイを管理。
     /// </summary>
-    public class GamePlay : SceneBehaviourBase, IWinReportable
+    public class GamePlay : SceneBehaviourBase, ILoseReportable
     {
         enum State
         {
@@ -22,8 +22,13 @@ namespace DAT.NPCTaisen
         State currentState = State.None;
         State nextState = State.None;
 
+        /// <summary>
+        /// プレイヤーのインスタンス
+        /// </summary>
+        PlayerController[] players;
+
         // 勝ち名乗りをしたプレイヤーのインスタンス
-        List<PlayerController> winReportPlayers = new List<PlayerController>(2);
+        List<PlayerController> loseReportPlayers = new List<PlayerController>(2);
 
         public override void StartScene(GameSystem instance)
         {
@@ -39,18 +44,18 @@ namespace DAT.NPCTaisen
         }
 
         /// <summary>
-        /// 勝利報告を受け取る。
+        /// 負け報告を受け取る。
         /// </summary>
         /// <param name="player">報告元のインスタンス</param>
-        public void ReportWin(PlayerController player)
+        public void ReportLose(PlayerController player)
         {
             // 2重報告は不要
-            if (winReportPlayers.Contains(player))
+            if (loseReportPlayers.Contains(player))
             {
                 return;
             }
 
-            winReportPlayers.Add(player);
+            loseReportPlayers.Add(player);
         }
 
         void InitState()
@@ -79,7 +84,7 @@ namespace DAT.NPCTaisen
         /// </summary>
         void InitGamePlay()
         {
-            var players = GameObject.FindObjectsOfType<PlayerController>();
+            players = GameObject.FindObjectsOfType<PlayerController>();
             foreach (var player in players)
             {
                 player.StartPlay(this);
@@ -103,7 +108,7 @@ namespace DAT.NPCTaisen
         void UpdateGamePlay()
         {
             // 勝敗判定
-            if (winReportPlayers.Count == 0)
+            if (loseReportPlayers.Count == 0)
             {
                 return;
             }
@@ -112,14 +117,35 @@ namespace DAT.NPCTaisen
             nextState = State.ToResult;
 
             // 引き分け
-            if (winReportPlayers.Count == 2)
+            if (loseReportPlayers.Count == 2)
             {
                 gameSystem.SetResult(GameSystem.GameResultType.Draw);
                 return;
             }
 
             // 勝者を報告
-            gameSystem.SetResult(GameSystem.GameResultType.WinLose, winReportPlayers[0].Name);
+            for (int i = 0; i < players.Length; i++)
+            {
+                bool isLose = false;
+                for (int j = 0; j < loseReportPlayers.Count; j++)
+                {
+                    if (players[i] == loseReportPlayers[j])
+                    {
+                        isLose = true;
+                        break;
+                    }
+                }
+
+                if (!isLose)
+                {
+                    // 勝者を設定
+                    gameSystem.SetResult(GameSystem.GameResultType.WinLose, players[i].Name);
+                    return;
+                }
+            }
+
+            // ここには来ないはず
+            Debug.LogWarning("勝者不明");
         }
 
         [System.Diagnostics.Conditional("DEBUG_KEY")]
@@ -127,19 +153,16 @@ namespace DAT.NPCTaisen
         {
             if (Input.GetButtonDown("Debug1PWin"))
             {
-                var players = GameObject.FindObjectsOfType<PlayerController>();
-                ReportWin(players[0]);
+                ReportLose(players[1]);
             }
             if (Input.GetButtonDown("Debug2PWin"))
             {
-                var players = GameObject.FindObjectsOfType<PlayerController>();
-                ReportWin(players[1]);
+                ReportLose(players[0]);
             }
             if (Input.GetButtonDown("DebugDraw"))
             {
-                var players = GameObject.FindObjectsOfType<PlayerController>();
-                ReportWin(players[0]);
-                ReportWin(players[1]);
+                ReportLose(players[0]);
+                ReportLose(players[1]);
             }
         }
     }
