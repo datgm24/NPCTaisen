@@ -24,7 +24,7 @@ namespace DAT.NPCTaisen
         /// <summary>
         /// フレーム更新
         /// </summary>
-        protected virtual void Update()
+        public virtual void Update()
         {
             attackedTime += Time.deltaTime;
         }

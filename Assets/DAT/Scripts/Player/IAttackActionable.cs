@@ -24,5 +24,10 @@ namespace DAT.NPCTaisen
         /// </summary>
         /// <returns>攻撃を開始したら、true。</returns>
         bool Attack();
+
+        /// <summary>
+        /// 更新処理。MonoBehaviourのUpdateから呼び出す。
+        /// </summary>
+        void Update();
     }
 }

@@ -108,6 +108,12 @@ namespace DAT.NPCTaisen
         {
             // 入力からアクションを実行させる
             inputs[(int)controlType].InputToAction(moveable, attackActions);
+
+            // 攻撃の更新
+            for (int i = 0; i < attackActions.Length; i++)
+            {
+                attackActions[i].Update();
+            }
         }
     }
 }
