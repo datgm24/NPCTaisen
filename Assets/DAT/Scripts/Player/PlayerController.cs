@@ -135,5 +135,21 @@ namespace DAT.NPCTaisen
             attacking = attack;
             nextState = State.Attack;
         }
+
+        /// <summary>
+        /// 攻撃フレームになったら、アニメから呼び出す。
+        /// </summary>
+        public void OnAttackFrame()
+        {
+            Debug.Log($"攻撃開始");
+        }
+
+        /// <summary>
+        /// 攻撃アニメが終わったら、アニメから呼び出す。
+        /// </summary>
+        public void OnAttacked()
+        {
+            nextState = State.Move;
+        }
     }
 }
