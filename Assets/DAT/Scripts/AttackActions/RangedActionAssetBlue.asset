@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab08623d4a58bb54e8fdee2a64a97506, type: 3}
+  m_Name: RangedActionAssetBlue
+  m_EditorClassIdentifier: 
+  interval: 1
+  attackPrefab: {fileID: 2288327924708229850, guid: 383b9054c5696514984dd95ebbd1d7b9, type: 3}

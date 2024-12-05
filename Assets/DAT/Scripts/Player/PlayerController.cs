@@ -35,8 +35,8 @@ namespace DAT.NPCTaisen
         [SerializeField]
         string playerName = "";
 
-        [SerializeField, Tooltip("攻撃を2つ設定する。")]
-        AttackableBase [] attackables = new AttackableBase[2];
+        [SerializeField, Tooltip("攻撃アクションを2つ設定する。")]
+        AttackActionBase [] attackActions = new AttackActionBase[2];
 
         /// <summary>
         /// プレイヤー名
@@ -107,7 +107,7 @@ namespace DAT.NPCTaisen
         void UpdatePlay()
         {
             // 入力からアクションを実行させる
-            inputs[(int)controlType].InputToAction(moveable, attackables);
+            inputs[(int)controlType].InputToAction(moveable, attackActions);
         }
     }
 }

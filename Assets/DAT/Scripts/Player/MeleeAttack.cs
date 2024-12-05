@@ -5,21 +5,10 @@ using UnityEngine;
 namespace DAT.NPCTaisen
 {
     /// <summary>
-    /// 近接攻撃
+    /// 近接攻撃オブジェクトの制御クラス。
     /// </summary>
-    public class MeleeAttack : AttackableBase
+    public class MeleeAttack : AttackBase, IAttackable
     {
-        public override bool Attack(IMovable from)
-        {
-            if (!base.Attack(from))
-            {
-                return false;
-            }
-
-            Debug.Log($"melee");
-            return true;
-        }
-
         protected override void OnHit()
         {
             Debug.Log($"近接ヒット");

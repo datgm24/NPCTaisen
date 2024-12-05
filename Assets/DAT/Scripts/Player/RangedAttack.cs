@@ -4,22 +4,14 @@ using UnityEngine;
 
 namespace DAT.NPCTaisen
 {
-    public class RangedAttack : AttackableBase
+    /// <summary>
+    /// 遠隔攻撃オブジェクトの制御クラス。
+    /// </summary>
+    public class RangedAttack : AttackBase, IAttackable
     {
-        public override bool Attack(IMovable from)
-        {
-            if (!base.Attack(from))
-            {
-                return false;
-            }
-
-            Debug.Log($"Ranged");
-            return true;
-        }
-
         protected override void OnHit()
         {
-            Debug.Log($"遠距離ヒット");
+            Debug.Log($"遠隔攻撃が当たった");
         }
     }
 }

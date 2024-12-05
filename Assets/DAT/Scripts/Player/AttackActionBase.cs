@@ -4,22 +4,17 @@ using UnityEngine;
 
 namespace DAT.NPCTaisen
 {
-    /// <summary>
-    /// 攻撃オブジェクトを制御するベースクラス
-    /// </summary>
-    public abstract class AttackableBase : MonoBehaviour, IAttackable
+    public class AttackActionBase : ScriptableObject, IAttackActionable
     {
         [SerializeField, Tooltip("次の攻撃ができるようになるまでの待機秒数")]
         float interval = 1f;
 
+        [SerializeField, Tooltip("攻撃用オブジェクトのプレハブ")]
+        protected AttackBase attackPrefab = default;
+
         public bool IsAttacking { get; protected set; } = false;
 
         public bool CanAttack => attackedTime >= interval;
-
-        /// <summary>
-        /// 攻撃主
-        /// </summary>
-        protected IMovable attacker;
 
         /// <summary>
         /// 攻撃してからの経過秒数。
@@ -34,23 +29,16 @@ namespace DAT.NPCTaisen
             attackedTime += Time.deltaTime;
         }
 
-        public virtual bool Attack(IMovable from)
+        public virtual bool Attack()
         {
             if (!CanAttack)
             {
                 return false;
             }
 
-            attacker = from;
             IsAttacking = true;
             attackedTime = 0;
             return true;
         }
-
-
-        /// <summary>
-        /// 攻撃が当たったときに、各攻撃の処理を実装するメソッド。
-        /// </summary>
-        protected abstract void OnHit();
     }
 }

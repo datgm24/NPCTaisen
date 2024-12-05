@@ -5,24 +5,14 @@ using UnityEngine;
 namespace DAT.NPCTaisen
 {
     /// <summary>
-    /// 攻撃用インターフェース
+    /// 攻撃オブジェクト用インターフェース
     /// </summary>
     public interface IAttackable
     {
         /// <summary>
-        /// 攻撃モーション中のとき、true
+        /// 出現時に、攻撃主の名前を受け取る。
         /// </summary>
-        bool IsAttacking { get; }
-
-        /// <summary>
-        /// 次の攻撃ができる状態なら、true
-        /// </summary>
-        bool CanAttack { get; }
-
-        /// <summary>
-        /// 攻撃する。
-        /// </summary>
-        /// <returns>攻撃を開始したら、true。</returns>
-        bool Attack(IMovable attacker);
+        /// <param name="owner">攻撃主の名前</param>
+        void SetOwner(string owner);
     }
 }

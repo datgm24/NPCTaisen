@@ -9,7 +9,7 @@ namespace DAT.NPCTaisen
     /// </summary>
     public class InputToAction2P : ITaisenInput
     {
-        public void InputToAction(IMovable move, IAttackable[] attacks)
+        public void InputToAction(IMovable move, IAttackActionable[] attacks)
         {
             Vector2 inputMove = Vector2.zero;
             inputMove.x = Input.GetAxisRaw("Horizontal2P");
@@ -18,11 +18,11 @@ namespace DAT.NPCTaisen
 
             if (Input.GetButtonDown("Melee2P"))
             {
-                attacks[0].Attack(move);
+                attacks[0].Attack();
             }
             if (Input.GetButtonDown("Range2P"))
             {
-                attacks[1].Attack(move);
+                attacks[1].Attack();
             }
         }
     }

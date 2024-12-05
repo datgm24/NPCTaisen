@@ -12,6 +12,6 @@ namespace DAT.NPCTaisen
         /// <summary>
         /// 入力やAIの判断から、行動を呼び出す。
         /// </summary>
-        void InputToAction(IMovable move, IAttackable[] attacks);
+        void InputToAction(IMovable move, IAttackActionable[] attacks);
     }
 }
