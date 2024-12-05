@@ -87,5 +87,13 @@ PrefabInstance:
       propertyPath: controlType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9123851920434109920, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}
+      propertyPath: attackables.Array.data[0]
+      value: 
+      objectReference: {fileID: 6664849756314605787, guid: 73d8a789e7e55a74f8862a877ee93ee2, type: 3}
+    - target: {fileID: 9123851920434109920, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}
+      propertyPath: attackables.Array.data[1]
+      value: 
+      objectReference: {fileID: 2288327924708229850, guid: 383b9054c5696514984dd95ebbd1d7b9, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}
