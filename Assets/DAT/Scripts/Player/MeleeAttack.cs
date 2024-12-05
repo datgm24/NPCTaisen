@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace DAT.NPCTaisen
@@ -12,6 +10,30 @@ namespace DAT.NPCTaisen
         protected override void OnHit()
         {
             Debug.Log($"近接ヒット");
+        }
+
+        /// <summary>
+        /// 攻撃開始
+        /// </summary>
+        public void OnAttackStart()
+        {
+            canHit = true;
+        }
+
+        /// <summary>
+        /// 攻撃終了
+        /// </summary>
+        public void OnAttackEnd()
+        {
+            canHit = false;
+        }
+
+        /// <summary>
+        /// アニメが終わった
+        /// </summary>
+        public void OnFinished()
+        {
+            Destroy( gameObject );
         }
     }
 }

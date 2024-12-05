@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab08623d4a58bb54e8fdee2a64a97506, type: 3}
   m_Name: RangedActionAssetRed
   m_EditorClassIdentifier: 
+  attackAnimation: 2
   interval: 1
   attackPrefab: {fileID: -1659652418646579969, guid: 0010acdd05abf8549912814f4eb7ddc0, type: 3}

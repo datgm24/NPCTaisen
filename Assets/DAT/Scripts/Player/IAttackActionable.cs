@@ -20,6 +20,11 @@ namespace DAT.NPCTaisen
         bool CanAttack { get; }
 
         /// <summary>
+        /// 攻撃アニメの状態
+        /// </summary>
+        PlayerAnimationState AnimationState { get; }
+
+        /// <summary>
         /// 攻撃する。
         /// </summary>
         /// <param name="listener">攻撃を開始するときに、通知する先のインスタンス</param>
@@ -30,5 +35,13 @@ namespace DAT.NPCTaisen
         /// 更新処理。MonoBehaviourのUpdateから呼び出す。
         /// </summary>
         void Update();
+
+        /// <summary>
+        /// 攻撃オブジェクトを生成する。
+        /// </summary>
+        /// <param name="position">生成先の座標</param>
+        /// <param name="rotation">向き</param>
+        /// <param name="ownerName">攻撃主の名前</param>
+        IAttackable SpawnAttack(Vector3 position, Quaternion rotation, string ownerName);
     }
 }

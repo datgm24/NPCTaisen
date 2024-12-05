@@ -30,13 +30,6 @@ namespace DAT.NPCTaisen
             AI,
         }
 
-        public enum AnimationState
-        {
-            Walk,
-            MeleeAttack,
-            RangedAttack,
-        }
-
         [SerializeField]
         ControlType controlType =ControlType.P1;
 
@@ -65,9 +58,12 @@ namespace DAT.NPCTaisen
         /// </summary>
         IAttackActionable attacking;
 
+        Animator animator;
+
         private void Awake()
         {
             moveable = GetComponent<IMovable>();
+            animator = GetComponent<Animator>();
             inputs = new ITaisenInput[]
             {
                 new InputToAction1P(this),
@@ -102,7 +98,28 @@ namespace DAT.NPCTaisen
 
             switch (currentState)
             {
+                case State.Move:
+                    animator.SetInteger("State", (int)PlayerAnimationState.Walk);
+                    break;
+
+                case State.Attack:
+                    InitAttack();
+                    break;
             }
+        }
+
+        /// <summary>
+        /// 攻撃の初期化
+        /// </summary>
+        void InitAttack()
+        {
+            if (attacking == null)
+            {
+                nextState = State.Move;
+                return;
+            }
+
+            animator.SetInteger("State", (int)attacking.AnimationState);
         }
 
         void UpdateState()
@@ -141,7 +158,12 @@ namespace DAT.NPCTaisen
         /// </summary>
         public void OnAttackFrame()
         {
-            Debug.Log($"攻撃開始");
+            if (currentState != State.Attack)
+            {
+                return;
+            }
+
+            attacking.SpawnAttack(transform.position, transform.rotation, playerName);
         }
 
         /// <summary>

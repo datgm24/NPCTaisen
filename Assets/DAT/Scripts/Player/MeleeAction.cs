@@ -21,5 +21,11 @@ namespace DAT.NPCTaisen
             Debug.Log($"melee");
             return true;
         }
+
+        public override IAttackable SpawnAttack(Vector3 position, Quaternion rotation, string ownerName)
+        {
+            var attackObject = base.SpawnAttack(position, rotation, ownerName);
+            return attackObject;
+        }
     }
 }

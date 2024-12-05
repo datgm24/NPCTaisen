@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace DAT.NPCTaisen
 {
-    public class AttackActionBase : ScriptableObject, IAttackActionable
+    public abstract class AttackActionBase : ScriptableObject, IAttackActionable
     {
+        [SerializeField, Tooltip("プレイヤーの攻撃モーション")]
+        PlayerAnimationState attackAnimation = PlayerAnimationState.MeleeAttack;
+
         [SerializeField, Tooltip("次の攻撃ができるようになるまでの待機秒数")]
         float interval = 1f;
 
@@ -15,6 +18,8 @@ namespace DAT.NPCTaisen
         public bool IsAttacking { get; protected set; } = false;
 
         public bool CanAttack => attackedTime >= interval;
+
+        public PlayerAnimationState AnimationState => attackAnimation;
 
         /// <summary>
         /// 攻撃してからの経過秒数。
@@ -40,6 +45,13 @@ namespace DAT.NPCTaisen
             attackedTime = 0;
             listener.OnAttacking(this);
             return true;
+        }
+
+        public virtual IAttackable SpawnAttack(Vector3 position, Quaternion rotation, string ownerName)
+        {
+            var attackObject = Instantiate(attackPrefab, position, rotation).GetComponent<IAttackable>();
+            attackObject.SetOwner(ownerName);
+            return attackObject;
         }
     }
 }
