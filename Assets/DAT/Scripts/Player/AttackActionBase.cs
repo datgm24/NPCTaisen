@@ -29,7 +29,7 @@ namespace DAT.NPCTaisen
             attackedTime += Time.deltaTime;
         }
 
-        public virtual bool Attack()
+        public virtual bool Attack(IAttackActionListener listener)
         {
             if (!CanAttack)
             {
@@ -38,6 +38,7 @@ namespace DAT.NPCTaisen
 
             IsAttacking = true;
             attackedTime = 0;
+            listener.OnAttacking(this);
             return true;
         }
     }

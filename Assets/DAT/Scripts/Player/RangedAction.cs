@@ -11,9 +11,9 @@ namespace DAT.NPCTaisen
     [CreateAssetMenu(fileName = "RangedActionAsset", menuName = "ScriptableObjects/DAT/RangedActionAsset")]
     public class RangedAction : AttackActionBase, IAttackActionable
     {
-        public override bool Attack()
+        public override bool Attack(IAttackActionListener listener)
         {
-            if (!base.Attack())
+            if (!base.Attack(listener))
             {
                 return false;
             }

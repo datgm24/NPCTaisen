@@ -7,13 +7,14 @@ namespace DAT.NPCTaisen
     /// <summary>
     /// プレイヤーを統括制御するクラス。
     /// </summary>
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IAttackActionListener
     {
         public enum State
         {
             None = -1,
             Standby,
-            Play,
+            Move,
+            Attack,
             Win,
             Lose,
             Draw,
@@ -27,6 +28,13 @@ namespace DAT.NPCTaisen
             P1,
             P2,
             AI,
+        }
+
+        public enum AnimationState
+        {
+            Walk,
+            MeleeAttack,
+            RangedAttack,
         }
 
         [SerializeField]
@@ -46,20 +54,26 @@ namespace DAT.NPCTaisen
         State currentState = State.None;
         State nextState = State.Standby;
 
-        ITaisenInput[] inputs =
-        {
-            new InputToAction1P(),
-            new InputToAction2P(),
-            null
-        };
+        ITaisenInput[] inputs;
 
         IMovable moveable = null;
 
         GamePlay gamePlay = null;
 
+        /// <summary>
+        /// 攻撃中のアクションのインスタンス
+        /// </summary>
+        IAttackActionable attacking;
+
         private void Awake()
         {
             moveable = GetComponent<IMovable>();
+            inputs = new ITaisenInput[]
+            {
+                new InputToAction1P(this),
+                new InputToAction2P(this),
+                null
+            };
         }
 
         private void Update()
@@ -73,7 +87,7 @@ namespace DAT.NPCTaisen
         /// </summary>
         public void StartPlay(GamePlay play)
         {
-            nextState = State.Play;
+            nextState = State.Move;
             gamePlay = play;
         }
 
@@ -95,25 +109,31 @@ namespace DAT.NPCTaisen
         {
             switch (currentState)
             {
-                case State.Play:
-                    UpdatePlay();
+                case State.Move:
+                    UpdateMove();
                     break;
             }
-        }
-
-        /// <summary>
-        /// 操作の更新処理
-        /// </summary>
-        void UpdatePlay()
-        {
-            // 入力からアクションを実行させる
-            inputs[(int)controlType].InputToAction(moveable, attackActions);
 
             // 攻撃の更新
             for (int i = 0; i < attackActions.Length; i++)
             {
                 attackActions[i].Update();
             }
+        }
+
+        /// <summary>
+        /// 操作の更新処理
+        /// </summary>
+        void UpdateMove()
+        {
+            // 入力からアクションを実行させる
+            inputs[(int)controlType].InputToAction(moveable, attackActions);
+        }
+
+        public void OnAttacking(IAttackActionable attack)
+        {
+            attacking = attack;
+            nextState = State.Attack;
         }
     }
 }

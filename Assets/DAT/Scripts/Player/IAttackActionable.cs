@@ -22,8 +22,9 @@ namespace DAT.NPCTaisen
         /// <summary>
         /// 攻撃する。
         /// </summary>
+        /// <param name="listener">攻撃を開始するときに、通知する先のインスタンス</param>
         /// <returns>攻撃を開始したら、true。</returns>
-        bool Attack();
+        bool Attack(IAttackActionListener listener);
 
         /// <summary>
         /// 更新処理。MonoBehaviourのUpdateから呼び出す。
