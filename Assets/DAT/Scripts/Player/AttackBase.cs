@@ -54,6 +54,11 @@ namespace DAT.NPCTaisen
             }
         }
 
+        void OnTriggerStay(Collider other)
+        {
+            OnTriggerEnter(other);
+        }
+
         public void SetOwnerAndColor(string owner, Color color)
         {
             ownerName = owner;

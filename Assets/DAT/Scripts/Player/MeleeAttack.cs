@@ -9,7 +9,15 @@ namespace DAT.NPCTaisen
     {
         protected override void OnHit(Collider other)
         {
-            Debug.Log($"近接ヒット");
+            if (!canHit)
+            {
+                return;
+            }
+
+            if (other.CompareTag("Player"))
+            {
+                canHit = false;
+            }
         }
 
         /// <summary>
