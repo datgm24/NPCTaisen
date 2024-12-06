@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DAT.NPCTaisen
 {
-    public abstract class AttackActionBase : ScriptableObject, IAttackActionable
+    public abstract class AttackActionBase : MonoBehaviour, IAttackActionable
     {
         [SerializeField, Tooltip("プレイヤーの攻撃モーション")]
         PlayerAnimationState attackAnimation = PlayerAnimationState.MeleeAttack;
@@ -47,9 +47,9 @@ namespace DAT.NPCTaisen
             return true;
         }
 
-        public virtual IAttackable SpawnAttack(Transform sourceTransform, string ownerName, Color attackColor)
+        public virtual IAttackable SpawnAttack(string ownerName, Color attackColor)
         {
-            var attackObject = Instantiate(attackPrefab, sourceTransform.position, sourceTransform.rotation).GetComponent<IAttackable>();
+            var attackObject = Instantiate(attackPrefab, transform.position, transform.rotation).GetComponent<IAttackable>();
             attackObject.SetOwnerAndColor(ownerName, attackColor);
             return attackObject;
         }

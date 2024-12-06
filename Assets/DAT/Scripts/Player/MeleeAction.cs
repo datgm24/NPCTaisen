@@ -8,7 +8,6 @@ namespace DAT.NPCTaisen
     /// プレイヤーの近接攻撃アクションの実装。
     /// コンクリート（具象）クラスなので、べた書きでよい。
     /// </summary>
-    [CreateAssetMenu(fileName = "MeleeActionAsset", menuName = "ScriptableObjects/DAT/MeleeActionAsset")]
     public class MeleeAction : AttackActionBase, IAttackActionable
     {
         public override bool Attack(IAttackActionListener listener)
@@ -22,9 +21,9 @@ namespace DAT.NPCTaisen
             return true;
         }
 
-        public override IAttackable SpawnAttack(Transform sourceTransform, string ownerName, Color attackColor)
+        public override IAttackable SpawnAttack(string ownerName, Color attackColor)
         {
-            var attackObject = base.SpawnAttack(sourceTransform, ownerName, attackColor);
+            var attackObject = base.SpawnAttack(ownerName, attackColor);
             return attackObject;
         }
     }

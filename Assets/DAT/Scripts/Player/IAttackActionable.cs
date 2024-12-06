@@ -39,10 +39,9 @@ namespace DAT.NPCTaisen
         /// <summary>
         /// 攻撃オブジェクトを生成する。
         /// </summary>
-        /// <param name="transform">攻撃主のTransform</param>
         /// <param name="ownerName">攻撃主の名前</param>
         /// <param name="attackColor">攻撃した色</param>
         /// <returns>出現させた攻撃のインスタンスを返す。</returns>
-        IAttackable SpawnAttack(Transform transform, string ownerName, Color attackColor);
+        IAttackable SpawnAttack(string ownerName, Color attackColor);
     }
 }

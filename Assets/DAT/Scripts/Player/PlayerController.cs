@@ -167,7 +167,7 @@ namespace DAT.NPCTaisen
                 return;
             }
 
-            attacking.SpawnAttack(transform, playerName, attackColor);
+            attacking.SpawnAttack(playerName, attackColor);
         }
 
         /// <summary>
