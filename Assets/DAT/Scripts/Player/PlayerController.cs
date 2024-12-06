@@ -39,6 +39,9 @@ namespace DAT.NPCTaisen
         [SerializeField, Tooltip("攻撃アクションを2つ設定する。")]
         AttackActionBase [] attackActions = new AttackActionBase[2];
 
+        [SerializeField, Tooltip("攻撃色")]
+        Color attackColor = Color.white;
+
         /// <summary>
         /// プレイヤー名
         /// </summary>
@@ -120,6 +123,7 @@ namespace DAT.NPCTaisen
             }
 
             animator.SetInteger("State", (int)attacking.AnimationState);
+            moveable.Move(Vector2.zero);
         }
 
         void UpdateState()
@@ -163,7 +167,7 @@ namespace DAT.NPCTaisen
                 return;
             }
 
-            attacking.SpawnAttack(transform.position, transform.rotation, playerName);
+            attacking.SpawnAttack(transform, playerName, attackColor);
         }
 
         /// <summary>

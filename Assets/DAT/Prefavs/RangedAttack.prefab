@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 2231770418280991762}
   - component: {fileID: -1659652418646579969}
   m_Layer: 0
-  m_Name: RangedAttackRed
+  m_Name: RangedAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

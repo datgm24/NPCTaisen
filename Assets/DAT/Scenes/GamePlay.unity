@@ -271,63 +271,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1060019225014499054, guid: c323863aa37fa0d448c39dde6ed7a45c, type: 3}
   m_PrefabInstance: {fileID: 161548349}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &261270520
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6463533284675457474, guid: 3e1b3c6c1f0e0e942b3383f112e942a6, type: 3}
-      propertyPath: m_Name
-      value: MeleeAttackRed
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463533284675457475, guid: 3e1b3c6c1f0e0e942b3383f112e942a6, type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463533284675457475, guid: 3e1b3c6c1f0e0e942b3383f112e942a6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463533284675457475, guid: 3e1b3c6c1f0e0e942b3383f112e942a6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463533284675457475, guid: 3e1b3c6c1f0e0e942b3383f112e942a6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463533284675457475, guid: 3e1b3c6c1f0e0e942b3383f112e942a6, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463533284675457475, guid: 3e1b3c6c1f0e0e942b3383f112e942a6, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463533284675457475, guid: 3e1b3c6c1f0e0e942b3383f112e942a6, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463533284675457475, guid: 3e1b3c6c1f0e0e942b3383f112e942a6, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463533284675457475, guid: 3e1b3c6c1f0e0e942b3383f112e942a6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463533284675457475, guid: 3e1b3c6c1f0e0e942b3383f112e942a6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463533284675457475, guid: 3e1b3c6c1f0e0e942b3383f112e942a6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3e1b3c6c1f0e0e942b3383f112e942a6, type: 3}
 --- !u!1 &450565850
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,7 +374,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1434
+  m_Name: pb_Mesh-1306
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1089,7 +1032,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1470
+  m_Name: pb_Mesh-1344
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1447,7 +1390,7 @@ PrefabInstance:
       objectReference: {fileID: 622477927}
     - target: {fileID: 4898089988779983608, guid: b3c57766d215f4a4786a78d5fad1c599, type: 3}
       propertyPath: m_VersionIndex
-      value: 137
+      value: 173
       objectReference: {fileID: 0}
     - target: {fileID: 4898089989207280294, guid: b3c57766d215f4a4786a78d5fad1c599, type: 3}
       propertyPath: m_Name
@@ -1512,7 +1455,7 @@ PrefabInstance:
       objectReference: {fileID: 1636226491}
     - target: {fileID: 6477587122815773781, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}
       propertyPath: m_VersionIndex
-      value: 113
+      value: 134
       objectReference: {fileID: 0}
     - target: {fileID: 6477587122815773784, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}
       propertyPath: m_Mesh

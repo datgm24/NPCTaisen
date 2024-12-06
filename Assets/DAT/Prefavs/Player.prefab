@@ -534,6 +534,7 @@ MonoBehaviour:
   attackActions:
   - {fileID: 11400000, guid: b67cb05aa7c1bff4f86eed28ddfdffff, type: 2}
   - {fileID: 11400000, guid: ed4251b9f68205e45856c2ddf4dc23e4, type: 2}
+  attackColor: {r: 1, g: 0.2, b: 0.2, a: 1}
 --- !u!114 &175373017253491860
 MonoBehaviour:
   m_ObjectHideFlags: 0

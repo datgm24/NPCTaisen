@@ -7,8 +7,16 @@ namespace DAT.NPCTaisen
     /// </summary>
     public abstract class AttackBase : MonoBehaviour, IAttackable
     {
+        /// <summary>
+        /// アニメから設定するアルファ値
+        /// </summary>
+        [HideInInspector]
+        public float alpha = 0;
+
         string ownerName;
         protected bool canHit = false;
+        protected Color attackColor;
+        MeshRenderer meshRenderer;
 
         void OnTriggerEnter(Collider other)
         {
@@ -20,15 +28,30 @@ namespace DAT.NPCTaisen
             // trueが戻ったら、攻撃成功。消すなり、当たり判定をなくすなりする。
         }
 
-        public void SetOwner(string owner)
+        public void SetOwnerAndColor(string owner, Color color)
         {
             ownerName = owner;
             canHit = false;
+            attackColor = color;
         }
 
         /// <summary>
         /// 攻撃が当たったときに、各攻撃の処理を実装するメソッド。
         /// </summary>
         protected abstract void OnHit();
+
+        /// <summary>
+        /// アルファ値を反映させる。
+        /// </summary>
+        protected virtual void Update()
+        {
+            if (meshRenderer == null)
+            {
+                meshRenderer = GetComponentInChildren<MeshRenderer>();
+            }
+
+            attackColor.a = alpha;
+            meshRenderer.material.color = attackColor;
+        }
     }
 }

@@ -22,9 +22,9 @@ namespace DAT.NPCTaisen
             return true;
         }
 
-        public override IAttackable SpawnAttack(Vector3 position, Quaternion rotation, string ownerName)
+        public override IAttackable SpawnAttack(Transform sourceTransform, string ownerName, Color attackColor)
         {
-            var attackObject = base.SpawnAttack(position, rotation, ownerName);
+            var attackObject = base.SpawnAttack(sourceTransform, ownerName, attackColor);
             return attackObject;
         }
     }

@@ -47,10 +47,10 @@ namespace DAT.NPCTaisen
             return true;
         }
 
-        public virtual IAttackable SpawnAttack(Vector3 position, Quaternion rotation, string ownerName)
+        public virtual IAttackable SpawnAttack(Transform sourceTransform, string ownerName, Color attackColor)
         {
-            var attackObject = Instantiate(attackPrefab, position, rotation).GetComponent<IAttackable>();
-            attackObject.SetOwner(ownerName);
+            var attackObject = Instantiate(attackPrefab, sourceTransform.position, sourceTransform.rotation).GetComponent<IAttackable>();
+            attackObject.SetOwnerAndColor(ownerName, attackColor);
             return attackObject;
         }
     }

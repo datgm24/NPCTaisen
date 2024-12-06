@@ -88,6 +88,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9123851920434109920, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}
+      propertyPath: attackColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9123851920434109920, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}
+      propertyPath: attackColor.g
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 9123851920434109920, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}
+      propertyPath: attackColor.r
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 9123851920434109920, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}
       propertyPath: attackables.Array.data[0]
       value: 
       objectReference: {fileID: 6664849756314605787, guid: 73d8a789e7e55a74f8862a877ee93ee2, type: 3}
@@ -98,10 +110,10 @@ PrefabInstance:
     - target: {fileID: 9123851920434109920, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}
       propertyPath: attackActions.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 528a62d0e7a5ec949beef8a0b78025bb, type: 2}
+      objectReference: {fileID: 11400000, guid: b67cb05aa7c1bff4f86eed28ddfdffff, type: 2}
     - target: {fileID: 9123851920434109920, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}
       propertyPath: attackActions.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: fb6923237bf62f2439eafc2205ee7912, type: 2}
+      objectReference: {fileID: 11400000, guid: ed4251b9f68205e45856c2ddf4dc23e4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}

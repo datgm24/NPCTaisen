@@ -13,6 +13,7 @@ namespace DAT.NPCTaisen
         /// 出現時に、攻撃主の名前を受け取る。
         /// </summary>
         /// <param name="owner">攻撃主の名前</param>
-        void SetOwner(string owner);
+        /// <param name="color">攻撃の色</param>
+        void SetOwnerAndColor(string owner, Color color);
     }
 }
