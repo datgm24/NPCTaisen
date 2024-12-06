@@ -18,28 +18,6 @@ namespace DAT.NPCTaisen
         protected Color attackColor;
         MeshRenderer meshRenderer;
 
-        void OnTriggerEnter(Collider other)
-        {
-            Debug.Log($"何かにヒット");
-            // TODO
-            // 相手から、IDamageableを取り出す。取り出せなければ終わり
-            // ダメージを与えるメソッドを、ownerを渡して呼び出す
-            // falseが戻ったら、攻撃主なので、何もしない
-            // trueが戻ったら、攻撃成功。消すなり、当たり判定をなくすなりする。
-        }
-
-        public void SetOwnerAndColor(string owner, Color color)
-        {
-            ownerName = owner;
-            canHit = false;
-            attackColor = color;
-        }
-
-        /// <summary>
-        /// 攻撃が当たったときに、各攻撃の処理を実装するメソッド。
-        /// </summary>
-        protected abstract void OnHit();
-
         /// <summary>
         /// アルファ値を反映させる。
         /// </summary>
@@ -53,5 +31,41 @@ namespace DAT.NPCTaisen
             attackColor.a = alpha;
             meshRenderer.material.color = attackColor;
         }
+
+        /// <summary>
+        /// 攻撃主を無視する。
+        /// 攻撃主以外のとき、OnHitを呼び出す。
+        /// </summary>
+        /// <param name="other">衝突相手の情報</param>
+        void OnTriggerEnter(Collider other)
+        {
+            var damageable = other.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                if (damageable.Damage(ownerName))
+                {
+                    OnHit(other);
+                }
+            }
+            else
+            {
+                // IDamageableがなければ、その他のオブジェクトなので、OnHitを呼び出す
+                OnHit(other);
+            }
+        }
+
+        public void SetOwnerAndColor(string owner, Color color)
+        {
+            ownerName = owner;
+            canHit = false;
+            attackColor = color;
+        }
+
+        /// <summary>
+        /// 攻撃が当たったときに、各攻撃の処理を実装するメソッド。
+        /// </summary>
+        protected abstract void OnHit(Collider other);
+
+
     }
 }

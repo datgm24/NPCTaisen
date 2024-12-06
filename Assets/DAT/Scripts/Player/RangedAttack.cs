@@ -9,9 +9,19 @@ namespace DAT.NPCTaisen
     /// </summary>
     public class RangedAttack : AttackBase, IAttackable
     {
-        protected override void OnHit()
+        [SerializeField, Tooltip("速度")]
+        float Speed = 8;
+
+        void Awake()
         {
-            Debug.Log($"遠隔攻撃が当たった");
+            var rb = GetComponent<Rigidbody>();
+            rb.velocity = transform.forward * Speed;
+        }
+
+        // これが呼ばれたら、敵か、壁に当たったので、消す。
+        protected override void OnHit(Collider other)
+        {
+            Destroy(gameObject);
         }
     }
 }

@@ -94,9 +94,9 @@ GameObject:
   - component: {fileID: 6463533284675457475}
   - component: {fileID: -98420338294900391}
   - component: {fileID: 6463533284675457472}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MeleeAttack
-  m_TagString: Untagged
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c53c6a9f6e7c8084bbb39b803298167c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 1
+  alpha: 0
 --- !u!95 &6463533284675457472
 Animator:
   serializedVersion: 4

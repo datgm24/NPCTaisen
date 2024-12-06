@@ -10,17 +10,6 @@ namespace DAT.NPCTaisen
     /// </summary>
     public class RangedAction : AttackActionBase, IAttackActionable
     {
-        public override bool Attack(IAttackActionListener listener)
-        {
-            if (!base.Attack(listener))
-            {
-                return false;
-            }
-
-            Debug.Log($"ranged");
-            return true;
-        }
-
         public override IAttackable SpawnAttack(string ownerName, Color attackColor)
         {
             var attackObject = base.SpawnAttack(ownerName, attackColor);

@@ -7,7 +7,7 @@ namespace DAT.NPCTaisen
     /// <summary>
     /// プレイヤーを統括制御するクラス。
     /// </summary>
-    public class PlayerController : MonoBehaviour, IAttackActionListener
+    public class PlayerController : MonoBehaviour, IAttackActionListener, IDamageable
     {
         public enum State
         {
@@ -176,6 +176,19 @@ namespace DAT.NPCTaisen
         public void OnAttacked()
         {
             nextState = State.Move;
+        }
+
+        public bool Damage(string ownerName)
+        {
+            // 自分の弾なら、ヒットしない
+            if (playerName == ownerName)
+            {
+                return false;
+            }
+
+            // 敵の弾なので、死亡
+            gamePlay.ReportLose(this);
+            return true;
         }
     }
 }

@@ -190,6 +190,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1060019225014499055, guid: c323863aa37fa0d448c39dde6ed7a45c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c323863aa37fa0d448c39dde6ed7a45c, type: 3}
 --- !u!4 &161420387 stripped
@@ -264,6 +268,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1060019225014499055, guid: c323863aa37fa0d448c39dde6ed7a45c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c323863aa37fa0d448c39dde6ed7a45c, type: 3}
 --- !u!4 &161548350 stripped
@@ -283,7 +291,7 @@ GameObject:
   - component: {fileID: 450565853}
   - component: {fileID: 450565852}
   - component: {fileID: 450565851}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -786,9 +794,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 968201022}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Field
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1253,6 +1261,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1060019225014499055, guid: c323863aa37fa0d448c39dde6ed7a45c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c323863aa37fa0d448c39dde6ed7a45c, type: 3}
 --- !u!4 &1645336526 stripped
@@ -1367,6 +1379,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 1060019225014499055, guid: c323863aa37fa0d448c39dde6ed7a45c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c323863aa37fa0d448c39dde6ed7a45c, type: 3}
 --- !u!1001 &1881521474587565665
@@ -1390,7 +1406,7 @@ PrefabInstance:
       objectReference: {fileID: 622477927}
     - target: {fileID: 4898089988779983608, guid: b3c57766d215f4a4786a78d5fad1c599, type: 3}
       propertyPath: m_VersionIndex
-      value: 206
+      value: 212
       objectReference: {fileID: 0}
     - target: {fileID: 4898089989207280294, guid: b3c57766d215f4a4786a78d5fad1c599, type: 3}
       propertyPath: m_Name
@@ -1455,7 +1471,7 @@ PrefabInstance:
       objectReference: {fileID: 1636226491}
     - target: {fileID: 6477587122815773781, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}
       propertyPath: m_VersionIndex
-      value: 161
+      value: 167
       objectReference: {fileID: 0}
     - target: {fileID: 6477587122815773784, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}
       propertyPath: m_Mesh

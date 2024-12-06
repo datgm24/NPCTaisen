@@ -7,7 +7,7 @@ namespace DAT.NPCTaisen
     /// </summary>
     public class MeleeAttack : AttackBase, IAttackable
     {
-        protected override void OnHit()
+        protected override void OnHit(Collider other)
         {
             Debug.Log($"近接ヒット");
         }
