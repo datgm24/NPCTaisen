@@ -17,7 +17,6 @@ namespace DAT.NPCTaisen
                 return false;
             }
 
-            Debug.Log($"melee");
             return true;
         }
 

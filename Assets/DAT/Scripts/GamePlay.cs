@@ -120,6 +120,10 @@ namespace DAT.NPCTaisen
             if (loseReportPlayers.Count == 2)
             {
                 gameSystem.SetResult(GameSystem.GameResultType.Draw);
+                for (int i = 0; i < players.Length; i++)
+                {
+                    players[i].SetDraw();
+                }
                 return;
             }
 
@@ -132,6 +136,7 @@ namespace DAT.NPCTaisen
                     if (players[i] == loseReportPlayers[j])
                     {
                         isLose = true;
+                        players[i].SetLose();
                         break;
                     }
                 }
@@ -140,12 +145,9 @@ namespace DAT.NPCTaisen
                 {
                     // 勝者を設定
                     gameSystem.SetResult(GameSystem.GameResultType.WinLose, players[i].Name);
-                    return;
+                    players[i].SetWin();
                 }
             }
-
-            // ここには来ないはず
-            Debug.LogWarning("勝者不明");
         }
 
         [System.Diagnostics.Conditional("DEBUG_KEY")]

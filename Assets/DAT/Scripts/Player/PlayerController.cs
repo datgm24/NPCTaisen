@@ -90,6 +90,27 @@ namespace DAT.NPCTaisen
             gamePlay = play;
         }
 
+        /// <summary>
+        /// 勝ったら呼び出す
+        /// </summary>
+        public void SetWin()
+        {
+            nextState = State.Win;
+        }
+
+        /// <summary>
+        /// 負けたら呼び出す
+        /// </summary>
+        public void SetLose()
+        {
+            nextState = State.Lose;
+        }
+
+        public void SetDraw()
+        {
+            nextState = State.Draw;
+        }
+
         void InitState()
         {
             if (nextState == State.None)
@@ -107,6 +128,12 @@ namespace DAT.NPCTaisen
 
                 case State.Attack:
                     InitAttack();
+                    break;
+
+                case State.Win:
+                case State.Lose:
+                case State.Draw:
+                    moveable.Move(Vector2.zero);
                     break;
             }
         }
@@ -153,8 +180,11 @@ namespace DAT.NPCTaisen
 
         public void OnAttacking(IAttackActionable attack)
         {
-            attacking = attack;
-            nextState = State.Attack;
+            if ((currentState == State.Move) && (nextState == State.None))
+            {
+                attacking = attack;
+                nextState = State.Attack;
+            }
         }
 
         /// <summary>
@@ -162,7 +192,7 @@ namespace DAT.NPCTaisen
         /// </summary>
         public void OnAttackFrame()
         {
-            if (currentState != State.Attack)
+            if ((currentState != State.Attack) || (nextState != State.None))
             {
                 return;
             }
@@ -175,7 +205,11 @@ namespace DAT.NPCTaisen
         /// </summary>
         public void OnAttacked()
         {
-            nextState = State.Move;
+            animator.SetInteger("State", (int)PlayerAnimationState.Walk);
+            if ((currentState == State.Attack) && (nextState == State.None))
+            {
+                nextState = State.Move;
+            }
         }
 
         public bool Damage(string ownerName)
