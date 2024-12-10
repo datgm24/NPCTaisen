@@ -36,6 +36,9 @@ namespace DAT.NPCTaisen
         [SerializeField]
         string playerName = "";
 
+        [SerializeField]
+        DecideActionParams decideActionParams;
+
         [SerializeField, Tooltip("攻撃アクションを2つ設定する。")]
         AttackActionBase [] attackActions = new AttackActionBase[2];
 
@@ -71,7 +74,7 @@ namespace DAT.NPCTaisen
             {
                 new InputToAction1P(this),
                 new InputToAction2P(this),
-                null
+                new AIAction(this, decideActionParams),
             };
         }
 
