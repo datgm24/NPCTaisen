@@ -72,12 +72,12 @@ namespace DAT.NPCTaisen
         {
             moveable = GetComponent<IMovable>();
             animator = GetComponent<Animator>();
-            GetEnemyTransform();
+            AIActionParams aiParams = new(decideActionParams, transform, attackActions);
             inputs = new ITaisenInput[]
             {
                 new InputToAction1P(this),
                 new InputToAction2P(this),
-                new AIAction(this, decideActionParams, transform, enemyTransform),
+                new AIAction(this, aiParams),
             };
         }
 
@@ -86,15 +86,6 @@ namespace DAT.NPCTaisen
         /// </summary>
         void GetEnemyTransform()
         {
-            var players = GameObject.FindGameObjectsWithTag("Player");
-            for (int i = 0; i < players.Length; i++)
-            {
-                if (players[i].gameObject != gameObject)
-                {
-                    enemyTransform = players[i].transform;
-                    return;
-                }
-            }
         }
 
         private void Update()

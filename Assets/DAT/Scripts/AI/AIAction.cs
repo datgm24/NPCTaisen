@@ -10,19 +10,15 @@ namespace DAT.NPCTaisen
     /// </summary>
     public class AIAction : InputToActionBase, ITaisenInput
     {
-        DecideActionParams decideActionParams;
         DecideMoveAction decideMoveAction;
         DecideAttackAction decideAttackAction;
-        Transform myTransform;
-        Transform enemyTransform;
+        AIActionParams aiActionParams;
 
-        public AIAction(IAttackActionListener listener, DecideActionParams decideParams, Transform myTransformParam, Transform enemyTransformParam) : base(listener)
+        public AIAction(IAttackActionListener listener, AIActionParams aiParams) : base(listener)
         {
-            decideActionParams = decideParams;
-            decideMoveAction = new(decideActionParams.moveParams);
-            decideAttackAction = new(decideActionParams.attackParams);
-            myTransform = myTransformParam;
-            enemyTransform = enemyTransformParam;
+            aiActionParams = aiParams;
+            decideMoveAction = new(aiParams.decideActionParams.moveParams);
+            decideAttackAction = new(aiParams.decideActionParams.attackParams);
         }
 
         public override void InputToAction(IMovable move, IAttackActionable[] attacks)
@@ -38,7 +34,7 @@ namespace DAT.NPCTaisen
         void MoveAction(IMovable move)
         {
             // 最高点の行動
-            decideMoveAction.DecideAndAction(move, myTransform, enemyTransform);
+            decideMoveAction.DecideAndAction(move, aiActionParams);
         }
 
         /// <summary>

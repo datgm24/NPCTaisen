@@ -25,5 +25,10 @@ namespace DAT.NPCTaisen
             var attackObject = base.SpawnAttack(ownerName, attackColor);
             return attackObject;
         }
+
+        public override void Score(ref float[] scores, Transform myTransform, Transform enemyTransform)
+        {
+            Debug.Log($"近距離攻撃をあてようとする移動採点");
+        }
     }
 }

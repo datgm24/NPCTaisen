@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DAT.NPCTaisen
 {
-    public abstract class AttackActionBase : MonoBehaviour, IAttackActionable
+    public abstract class AttackActionBase : MonoBehaviour, IAttackActionable, IScoreMoveWithTransform
     {
         [SerializeField, Tooltip("プレイヤーの攻撃モーション")]
         PlayerAnimationState attackAnimation = PlayerAnimationState.MeleeAttack;
@@ -14,6 +14,9 @@ namespace DAT.NPCTaisen
 
         [SerializeField, Tooltip("攻撃用オブジェクトのプレハブ")]
         protected AttackBase attackPrefab = default;
+
+        [SerializeField, Tooltip("攻撃を当てようとする優先度。デフォルト1。0にすると、攻撃を当てようとする動きをしない。")]
+        protected float attackMoveRate = 1f;
 
         public bool IsAttacking { get; protected set; } = false;
 
@@ -53,5 +56,7 @@ namespace DAT.NPCTaisen
             attackObject.SetOwnerAndColor(ownerName, attackColor);
             return attackObject;
         }
+
+        public abstract void Score(ref float[] scores, Transform myTransform, Transform enemyTransform);
     }
 }

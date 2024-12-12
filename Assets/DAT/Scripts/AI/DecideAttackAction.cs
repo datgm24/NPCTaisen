@@ -20,6 +20,5 @@ namespace DAT.NPCTaisen
             Init(System.Enum.GetValues(typeof(ActionType)).Length);
             decideAttackParams = decideParams;
         }
-
     }
 }

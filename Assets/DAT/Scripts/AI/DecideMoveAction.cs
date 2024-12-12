@@ -1,3 +1,4 @@
+using System.Runtime.ExceptionServices;
 using UnityEngine;
 
 namespace DAT.NPCTaisen
@@ -63,15 +64,22 @@ namespace DAT.NPCTaisen
         /// 判定と行動。
         /// </summary>
         /// <param name="move">移動のためのインターフェース</param>
-        public void DecideAndAction(IMovable move, Transform myTransform, Transform enemyTransform)
+        public void DecideAndAction(IMovable move, AIActionParams aiActionParams)
         {
             // 加点
             Clear();
 
             // 敵からの理想距離
             ClearScores();
-            ScoreFromEnemyDistance.Score(ref scores, myTransform.position, enemyTransform.position, decideMoveParams.fromEnemyDistance);
+            ScoreFromEnemyDistance.Score(ref scores, aiActionParams.myTransform.position, aiActionParams.enemyTransform.position, decideMoveParams.fromEnemyDistance);
             AddScores(decideMoveParams.fromEnemyWeight);
+
+            // 攻撃の採点
+            for (int i = 0; i < aiActionParams.attackScoring.Length; i++)
+            {
+                aiActionParams.attackScoring[i].Score(ref scores, aiActionParams.myTransform, aiActionParams.enemyTransform);
+                AddScores(decideMoveParams.attackWeight);
+            }
 
             // 移動実行
             move.Move(MoveVector[Decision]);

@@ -10,6 +10,13 @@ namespace DAT.NPCTaisen
     /// </summary>
     public class RangedAction : AttackActionBase, IAttackActionable
     {
+        public override void Score(ref float[] scores, Transform myTransform, Transform enemyTransform)
+        {
+            // attackMoveRateを、答えに掛ける
+
+            Debug.Log($"遠隔攻撃をあてようとする移動採点");
+        }
+
         public override IAttackable SpawnAttack(string ownerName, Color attackColor)
         {
             var attackObject = base.SpawnAttack(ownerName, attackColor);
