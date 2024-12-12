@@ -12,5 +12,14 @@ namespace DAT.NPCTaisen
             Melee,
             Ranged,
         }
+
+        DecideAttackParams decideAttackParams;
+
+        public DecideAttackAction(DecideAttackParams decideParams)
+        {
+            Init(System.Enum.GetValues(typeof(ActionType)).Length);
+            decideAttackParams = decideParams;
+        }
+
     }
 }

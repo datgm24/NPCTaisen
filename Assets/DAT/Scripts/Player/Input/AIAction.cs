@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace DAT.NPCTaisen
 {
@@ -10,12 +11,18 @@ namespace DAT.NPCTaisen
     public class AIAction : InputToActionBase, ITaisenInput
     {
         DecideActionParams decideActionParams;
-        DecideMoveAction decideMoveAction = new();
-        DecideAttackAction decideAttackAction = new();
+        DecideMoveAction decideMoveAction;
+        DecideAttackAction decideAttackAction;
+        Transform myTransform;
+        Transform enemyTransform;
 
-        public AIAction(IAttackActionListener listener, DecideActionParams decideActionParams) : base(listener)
+        public AIAction(IAttackActionListener listener, DecideActionParams decideParams, Transform myTransformParam, Transform enemyTransformParam) : base(listener)
         {
-            this.decideActionParams = decideActionParams;
+            decideActionParams = decideParams;
+            decideMoveAction = new(decideActionParams.moveParams);
+            decideAttackAction = new(decideActionParams.attackParams);
+            myTransform = myTransformParam;
+            enemyTransform = enemyTransformParam;
         }
 
         public override void InputToAction(IMovable move, IAttackActionable[] attacks)
@@ -30,14 +37,8 @@ namespace DAT.NPCTaisen
         /// <param name="move">移動指示先</param>
         void MoveAction(IMovable move)
         {
-            // 移動の決定処理
-            decideMoveAction.Clear();
-
-            // 加点
-
-
             // 最高点の行動
-            decideMoveAction.DecideAndAction(move);
+            decideMoveAction.DecideAndAction(move, myTransform, enemyTransform);
         }
 
         /// <summary>

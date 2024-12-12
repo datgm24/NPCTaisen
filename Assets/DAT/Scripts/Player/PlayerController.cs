@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 
 namespace DAT.NPCTaisen
@@ -65,17 +66,35 @@ namespace DAT.NPCTaisen
         IAttackActionable attacking;
 
         Animator animator;
+        Transform enemyTransform;
 
         private void Awake()
         {
             moveable = GetComponent<IMovable>();
             animator = GetComponent<Animator>();
+            GetEnemyTransform();
             inputs = new ITaisenInput[]
             {
                 new InputToAction1P(this),
                 new InputToAction2P(this),
-                new AIAction(this, decideActionParams),
+                new AIAction(this, decideActionParams, transform, enemyTransform),
             };
+        }
+
+        /// <summary>
+        /// 敵のTransformを検索して、設定する。
+        /// </summary>
+        void GetEnemyTransform()
+        {
+            var players = GameObject.FindGameObjectsWithTag("Player");
+            for (int i = 0; i < players.Length; i++)
+            {
+                if (players[i].gameObject != gameObject)
+                {
+                    enemyTransform = players[i].transform;
+                    return;
+                }
+            }
         }
 
         private void Update()
