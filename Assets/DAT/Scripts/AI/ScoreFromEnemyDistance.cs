@@ -23,10 +23,12 @@ namespace DAT.NPCTaisen
         public static void Score(ref float[] scores, Vector3 myPosition, Vector3 enemyPosition, float targetDistance)
         {
             // 目的座標
-
+            Vector3 toEnemy = enemyPosition - myPosition;
+            Vector3 toTargetVector = -targetDistance * toEnemy.normalized;
+            Vector3 targetPosition = enemyPosition + toTargetVector;
 
             // 到着判定
-            if (Vector3.Distance(myPosition, enemyPosition) <= IgnoreDistance)
+            if (Vector3.Distance(myPosition, targetPosition) <= IgnoreDistance)
             {
                 scores[(int)DecideMoveAction.ActionType.Stop] = 1;
                 return;
@@ -34,11 +36,11 @@ namespace DAT.NPCTaisen
 
             // 到着していないので、移動を選択
             scores[(int)DecideMoveAction.ActionType.Stop] = 0;
-            Vector3 toEnemy = enemyPosition - myPosition;
+            Vector3 toTarget = targetPosition - myPosition;
             for (int i = 1; i < scores.Length; i++)
             {
-                float angle = Mathf.Abs(Vector3.SignedAngle(toEnemy, DecideMoveAction.ActionVector[i], Vector3.up));
-                Debug.Log($"toEnemy={toEnemy} [{i}]={angle} actionVector={DecideMoveAction.ActionVector[i]}");
+                float angle = Mathf.Abs(Vector3.SignedAngle(toTarget, DecideMoveAction.ActionVector[i], Vector3.up));
+                Debug.Log($"toTarget={toTarget} [{i}]={angle} actionVector={DecideMoveAction.ActionVector[i]}");
                 // angle   score
                 // 0       1
                 // 90      0
