@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DAT.NPCTaisen
 {
-    public abstract class AttackActionBase : MonoBehaviour, IAttackActionable, IScoreMoveWithTransform
+    public abstract class AttackActionBase : MonoBehaviour, IAttackActionable, IScoreMoveWithTransform, IScoreAttackWithTransform
     {
         [SerializeField, Tooltip("プレイヤーの攻撃モーション")]
         PlayerAnimationState attackAnimation = PlayerAnimationState.MeleeAttack;
@@ -30,6 +30,20 @@ namespace DAT.NPCTaisen
         float attackedTime;
 
         /// <summary>
+        /// 攻撃元の攻撃開始を知らせるインスタンス
+        /// </summary>
+        IAttackActionListener attackActionListener;
+
+        /// <summary>
+        /// 攻撃を知らせる際のインスタンスを渡す。
+        /// </summary>
+        /// <param name="attackListener">設定するインスタンス</param>
+        public void SetAttackListener(IAttackActionListener attackListener)
+        {
+            attackActionListener = attackListener;
+        }
+
+        /// <summary>
         /// フレーム更新
         /// </summary>
         public virtual void Update()
@@ -37,7 +51,7 @@ namespace DAT.NPCTaisen
             attackedTime += Time.deltaTime;
         }
 
-        public virtual bool Attack(IAttackActionListener listener)
+        public virtual bool Attack()
         {
             if (!CanAttack)
             {
@@ -46,7 +60,7 @@ namespace DAT.NPCTaisen
 
             IsAttacking = true;
             attackedTime = 0;
-            listener.OnAttacking(this);
+            attackActionListener.OnAttacking(this);
             return true;
         }
 
@@ -57,6 +71,8 @@ namespace DAT.NPCTaisen
             return attackObject;
         }
 
-        public abstract void Score(ref float[] scores, Transform myTransform, Transform enemyTransform);
+        public abstract void ScoreMove(ref float[] scores, Transform myTransform, Transform enemyTransform);
+
+        public abstract DecideMoveAction.ActionType TryAttack(Transform myTransform, Transform enemyTransform);
     }
 }

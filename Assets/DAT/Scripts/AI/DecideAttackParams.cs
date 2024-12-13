@@ -11,5 +11,8 @@ namespace DAT.NPCTaisen
 
         [Tooltip("遠隔攻撃のウェイト")]
         public float rangedAttackWeight = 1;
+
+        [Tooltip("攻撃にかかる秒数")]
+        public float untilAttackSeconds = 0.1f;
     }
 }

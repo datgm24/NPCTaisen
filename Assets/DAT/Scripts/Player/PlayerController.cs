@@ -77,8 +77,12 @@ namespace DAT.NPCTaisen
             {
                 new InputToAction1P(this),
                 new InputToAction2P(this),
-                new AIAction(this, aiParams),
+                new AIAction(this, aiParams, attackActions),
             };
+            for (int i = 0; i < attackActions.Length; i++)
+            {
+                attackActions[i].SetAttackListener(this);
+            }
         }
 
         /// <summary>

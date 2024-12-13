@@ -10,9 +10,9 @@ namespace DAT.NPCTaisen
     /// </summary>
     public class MeleeAction : AttackActionBase, IAttackActionable
     {
-        public override bool Attack(IAttackActionListener listener)
+        public override bool Attack()
         {
-            if (!base.Attack(listener))
+            if (!base.Attack())
             {
                 return false;
             }
@@ -26,9 +26,14 @@ namespace DAT.NPCTaisen
             return attackObject;
         }
 
-        public override void Score(ref float[] scores, Transform myTransform, Transform enemyTransform)
+        public override void ScoreMove(ref float[] scores, Transform myTransform, Transform enemyTransform)
         {
             Debug.Log($"近距離攻撃をあてようとする移動採点");
+        }
+
+        public override DecideMoveAction.ActionType TryAttack(Transform myTransform, Transform enemyTransform)
+        {
+            return DecideMoveAction.ActionType.Stop;
         }
     }
 }

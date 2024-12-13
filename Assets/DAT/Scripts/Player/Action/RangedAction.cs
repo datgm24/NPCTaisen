@@ -23,7 +23,7 @@ namespace DAT.NPCTaisen
             matchedDot = Mathf.Cos(matchedDegree * Mathf.Deg2Rad);
         }
 
-        public override void Score(ref float[] scores, Transform myTransform, Transform enemyTransform)
+        public override void ScoreMove(ref float[] scores, Transform myTransform, Transform enemyTransform)
         {
             Vector3 toEnemy = (enemyTransform.position - myTransform.position);
             toEnemy.y = 0;
@@ -84,6 +84,11 @@ namespace DAT.NPCTaisen
         {
             var attackObject = base.SpawnAttack(ownerName, attackColor);
             return attackObject;
+        }
+
+        public override DecideMoveAction.ActionType TryAttack(Transform myTransform, Transform enemyTransform)
+        {
+            return DecideMoveAction.ActionType.Up;
         }
     }
 }

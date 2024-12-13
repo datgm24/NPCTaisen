@@ -18,7 +18,7 @@ namespace DAT.NPCTaisen
             UpLeft,
         }
 
-        static readonly Vector2[] MoveVector = new Vector2[]
+        public static readonly Vector2[] MoveVector = new Vector2[]
         {
             Vector2.zero,
             Vector2.up,
@@ -77,7 +77,7 @@ namespace DAT.NPCTaisen
             // 攻撃の採点
             for (int i = 0; i < aiActionParams.attackScoring.Length; i++)
             {
-                aiActionParams.attackScoring[i].Score(ref scores, aiActionParams.myTransform, aiActionParams.enemyTransform);
+                aiActionParams.attackScoring[i].ScoreMove(ref scores, aiActionParams.myTransform, aiActionParams.enemyTransform);
                 AddScores(decideMoveParams.attackWeight);
             }
 

@@ -14,36 +14,96 @@ namespace DAT.NPCTaisen
         DecideAttackAction decideAttackAction;
         AIActionParams aiActionParams;
 
-        public AIAction(IAttackActionListener listener, AIActionParams aiParams) : base(listener)
+        enum State
+        {
+            None = -1,
+            Walk,
+            Attack,
+        }
+
+        State currentState = State.None;
+        State nextState = State.Walk;
+        float waitTime;
+        AttackActionBase[] attackActions;
+
+        public AIAction(IAttackActionListener listener, AIActionParams aiParams, AttackActionBase[] attacks) : base(listener)
         {
             aiActionParams = aiParams;
             decideMoveAction = new(aiParams.decideActionParams.moveParams);
             decideAttackAction = new(aiParams.decideActionParams.attackParams);
+            attackActions = attacks;
         }
 
         public override void InputToAction(IMovable move, IAttackActionable[] attacks)
         {
-            MoveAction(move);
-            AttackAction(attacks);
+            InitState();
+            UpdateState(move);
+        }
+
+        void InitState()
+        {
+            if (nextState == State.None)
+            {
+                return;
+            }
+            currentState = nextState;
+            nextState = State.None;
+
+            switch(currentState)
+            {
+                case State.Attack:
+                    waitTime = 0;
+                    break;
+            }
+        }
+
+        void UpdateState(IMovable move)
+        {
+            switch (currentState)
+            {
+                case State.Walk:
+                    UpdateWalk(move);
+                    break;
+
+                case State.Attack:
+                    UpdateAttack(move);
+                    break;
+            }
         }
 
         /// <summary>
-        /// 移動の決定と行動。
+        /// 歩き状態の更新処理
         /// </summary>
-        /// <param name="move">移動指示先</param>
-        void MoveAction(IMovable move)
+        /// <param name="move"></param>
+        void UpdateWalk(IMovable move)
         {
-            // 最高点の行動
-            decideMoveAction.DecideAndAction(move, aiActionParams);
+            if (!decideAttackAction.TryAttackAndMove(move, aiActionParams, attackActions))
+            {
+                // 歩きを実行
+                decideMoveAction.DecideAndAction(move, aiActionParams);
+            }
+            else
+            {
+                // 攻撃開始
+                nextState = State.Attack;
+            }
         }
 
         /// <summary>
-        /// 攻撃の決定と行動。
+        /// 攻撃更新
         /// </summary>
-        /// <param name="attacks">攻撃指示先</param>
-        void AttackAction(IAttackActionable[] attacks)
+        void UpdateAttack(IMovable move)
         {
+            move.Move(Vector2.zero);
 
+            waitTime += Time.deltaTime;
+            if (waitTime < aiActionParams.decideActionParams.attackParams.untilAttackSeconds)
+            {
+                return;
+            }
+
+            decideAttackAction.BeginAttack();
+            nextState = State.Walk;
         }
     }
 }
