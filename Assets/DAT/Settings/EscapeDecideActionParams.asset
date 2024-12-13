@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: EscapeDecideActionParams
   m_EditorClassIdentifier: 
   moveParams:
-    attackWeight: 1
-    fromEnemyDistance: 5
+    attackWeight: 1.1
+    fromEnemyDistance: 10
     fromEnemyWeight: 1
     escapeEnemyAttackWeight: 1
     enemyFreezeAttackWeight: 1
+  attackParams:
+    meleeAttackWeight: 1
+    rangedAttackWeight: 1

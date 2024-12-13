@@ -47,3 +47,5 @@ MonoBehaviour:
   attackAnimation: 2
   interval: 1
   attackPrefab: {fileID: -1659652418646579969, guid: 0010acdd05abf8549912814f4eb7ddc0, type: 3}
+  attackMoveRate: 1
+  matchedDegree: 3
