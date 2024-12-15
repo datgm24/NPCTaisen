@@ -21,4 +21,4 @@ MonoBehaviour:
   attackParams:
     meleeAttackWeight: 1
     rangedAttackWeight: 1
-    untilAttackSeconds: 0.5
+    untilAttackSeconds: 0.1

@@ -13,14 +13,23 @@ namespace DAT.NPCTaisen
         [Tooltip("一致とみなす角度の誤差を度数で設定"), SerializeField]
         float matchedDegree = 2.5f;
 
+        [Tooltip("攻撃する誤差角度"), SerializeField]
+        float attackDegree = 2.5f;
+
         /// <summary>
         /// 内積を取った時に、この値以上なら一致とみなす値
         /// </summary>
         float matchedDot;
 
+        /// <summary>
+        /// 攻撃を判断する内積の値
+        /// </summary>
+        float attackDot;
+
         void Awake()
         {
             matchedDot = Mathf.Cos(matchedDegree * Mathf.Deg2Rad);
+            attackDot = Mathf.Cos(attackDegree * Mathf.Deg2Rad);
         }
 
         public override void ScoreMove(ref float[] scores, AIActionParams aiActionParams)
@@ -78,7 +87,22 @@ namespace DAT.NPCTaisen
         /// <returns></returns>
         public override DecideMoveAction.ActionType TryAttack(AIActionParams aiActionParams)
         {
-            return DecideMoveAction.ActionType.Up;
+            // 近すぎたら何もしない
+            if (aiActionParams.toEnemyInfo.IsTooNear)
+            {
+                return DecideMoveAction.ActionType.Stop;
+            }
+
+            float sideDistance = aiActionParams.toEnemyInfo.GetMaxDot();
+            if (sideDistance < attackDot)
+            {
+                return DecideMoveAction.ActionType.Stop;
+            }
+
+            // 最大に一致する方向へショット
+            int index = (int)aiActionParams.toEnemyInfo.GetMaxDotDirection();
+
+            return (DecideMoveAction.ActionType)(index + 1);
         }
     }
 }
