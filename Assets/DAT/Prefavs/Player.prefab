@@ -533,6 +533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controlType: 0
   playerName: Player1
+  decideActionParams: {fileID: 11400000, guid: c197ed552b141544a842cfd68c90f2c7, type: 2}
   attackActions:
   - {fileID: 8478478136184572248}
   - {fileID: 1445683060022205305}

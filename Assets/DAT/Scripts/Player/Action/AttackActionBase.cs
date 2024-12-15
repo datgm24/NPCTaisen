@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DAT.NPCTaisen
 {
-    public abstract class AttackActionBase : MonoBehaviour, IAttackActionable, IScoreMoveWithTransform, IScoreAttackWithTransform
+    public abstract class AttackActionBase : MonoBehaviour, IAttackActionable, IScoreMove, IScoreAttack
     {
         [SerializeField, Tooltip("プレイヤーの攻撃モーション")]
         PlayerAnimationState attackAnimation = PlayerAnimationState.MeleeAttack;
@@ -71,8 +71,8 @@ namespace DAT.NPCTaisen
             return attackObject;
         }
 
-        public abstract void ScoreMove(ref float[] scores, Transform myTransform, Transform enemyTransform);
+        public abstract void ScoreMove(ref float[] scores, AIActionParams aiActionParams);
 
-        public abstract DecideMoveAction.ActionType TryAttack(Transform myTransform, Transform enemyTransform);
+        public abstract DecideMoveAction.ActionType TryAttack(AIActionParams aiActionParams);
     }
 }

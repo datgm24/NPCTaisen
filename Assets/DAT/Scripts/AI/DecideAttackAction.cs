@@ -31,9 +31,9 @@ namespace DAT.NPCTaisen
         /// <returns>攻撃を開始するならtrue</returns>
         public bool TryAttackAndMove(IMovable move, AIActionParams aiActionParams, AttackActionBase[] attacks)
         {
-            for (int i=0;i<attacks.Length;i++)
+            for (int i = 0; i < attacks.Length; i++)
             {
-                var decision = attacks[i].TryAttack(aiActionParams.myTransform, aiActionParams.enemyTransform);
+                var decision = attacks[i].TryAttack(aiActionParams);
                 if (decision != DecideMoveAction.ActionType.Stop)
                 {
                     attackActionable = attacks[i];

@@ -23,60 +23,46 @@ namespace DAT.NPCTaisen
             matchedDot = Mathf.Cos(matchedDegree * Mathf.Deg2Rad);
         }
 
-        public override void ScoreMove(ref float[] scores, Transform myTransform, Transform enemyTransform)
+        public override void ScoreMove(ref float[] scores, AIActionParams aiActionParams)
         {
-            Vector3 toEnemy = (enemyTransform.position - myTransform.position);
-            toEnemy.y = 0;
-            Vector3 toEnemyNormalized = toEnemy.normalized;
-            int index = (int)DecideMoveAction.ActionType.Up;
-            float maxDot = Vector3.Dot(toEnemyNormalized, DecideMoveAction.ActionVector[index]);
-
-            // 右上から左上まで
-            for (int i = (int)DecideMoveAction.ActionType.UpRight ; i <= (int)DecideMoveAction.ActionType.UpLeft; i++)
-            {
-                float dot = Vector3.Dot(toEnemyNormalized, DecideMoveAction.ActionVector[i]);
-                if (dot > maxDot)
-                {
-                    maxDot = dot;
-                    index = i;
-                }
-            }
+            // 最大の内積値を返す
+            float maxDot = aiActionParams.toEnemyInfo.GetMaxDot();
 
             // すでに狙えていたら、停止
-            if (maxDot >= matchedDot)
+            if (aiActionParams.toEnemyInfo.IsTooNear || (maxDot >= matchedDot))
             {
-                scores[(int)DecideMoveAction.ActionType.Stop] = 0;
                 return;
             }
 
-            // 直行していて、敵がいる側のベクトルを求める
-            int plus2 = ((index + 2 - 1) % 8) + 1;
-            int minus2 = (index - 2);
-            if (minus2 < (int)DecideMoveAction.ActionType.Up)
+            // 敵がいる方向に一番近い方向をmaxIndexに求める
+            Direction.Index maxIndex = aiActionParams.toEnemyInfo.GetMaxDotDirection();
+
+            // 直交するインデックスを得る
+            Direction.Index sideIndex = Direction.GetOrthogonalIndex(maxIndex);
+
+            // 敵がいる側に設定
+            float side2dot = aiActionParams.toEnemyInfo.GetDot(sideIndex);
+            if (side2dot < 0)
             {
-                minus2 += (int)DecideMoveAction.ActionType.UpLeft;
+                sideIndex = Direction.GetReverseIndex(sideIndex);
             }
-            Vector3 targetVector = DecideMoveAction.ActionVector[plus2];
-            float plus2dot = Vector3.Dot(toEnemyNormalized, targetVector);
-            if (plus2dot < 0)
-            {
-                targetVector = DecideMoveAction.ActionVector[minus2];
-            }
+            Vector3 sideVector = Direction.Vector[(int)sideIndex];
 
             // 自分から敵へのベクトルに直交するベクトルを求める
-            Vector3 toEnemyTangent = Vector3.Cross(toEnemyNormalized, Vector3.up);
+            Vector3 toEnemy = aiActionParams.enemyTransform.position - aiActionParams.myTransform.position;
+            Vector3 toEnemyOrthogonal = Vector3.Cross(toEnemy.normalized, Vector3.up);
 
-            // toEnemyTangentと、targetVectorの向きを揃える
-            if (Vector3.Dot(toEnemyTangent, targetVector) < 0)
+            // toEnemyOrthogonalと、sideVectorの向きを揃える
+            if (Vector3.Dot(toEnemyOrthogonal, sideVector) < 0)
             {
-                toEnemyTangent = -toEnemyTangent;
+                toEnemyOrthogonal = -toEnemyOrthogonal;
             }
 
-            // toEnemyTangentと、各方向の内積を求めて、その値を得点とする
+            // toEnemyOrthogonalと、各方向の内積を求めて、その値を得点とする
             // attackMoveRateを、答えに掛ける
-            for (int i=(int)DecideMoveAction.ActionType.Up; i<=(int)DecideMoveAction.ActionType.UpLeft; i++)
+            for (int i = (int)DecideMoveAction.ActionType.Up; i <= (int)DecideMoveAction.ActionType.UpLeft; i++)
             {
-                scores[i] = attackMoveRate * Vector3.Dot(toEnemyTangent, DecideMoveAction.ActionVector[i]);
+                scores[i] = attackMoveRate * Vector3.Dot(toEnemyOrthogonal, DecideMoveAction.ActionVector[i]);
             }
         }
 
@@ -86,7 +72,11 @@ namespace DAT.NPCTaisen
             return attackObject;
         }
 
-        public override DecideMoveAction.ActionType TryAttack(Transform myTransform, Transform enemyTransform)
+        /// <summary>
+        /// 攻撃する判定。攻撃するなら、向きを設定する。
+        /// </summary>
+        /// <returns></returns>
+        public override DecideMoveAction.ActionType TryAttack(AIActionParams aiActionParams)
         {
             return DecideMoveAction.ActionType.Up;
         }

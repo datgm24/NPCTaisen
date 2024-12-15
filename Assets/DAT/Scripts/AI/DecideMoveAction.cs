@@ -77,7 +77,7 @@ namespace DAT.NPCTaisen
             // 攻撃の採点
             for (int i = 0; i < aiActionParams.attackScoring.Length; i++)
             {
-                aiActionParams.attackScoring[i].ScoreMove(ref scores, aiActionParams.myTransform, aiActionParams.enemyTransform);
+                aiActionParams.attackScoring[i].ScoreMove(ref scores, aiActionParams);
                 AddScores(decideMoveParams.attackWeight);
             }
 

@@ -49,7 +49,7 @@ namespace DAT.NPCTaisen
             currentState = nextState;
             nextState = State.None;
 
-            switch(currentState)
+            switch (currentState)
             {
                 case State.Attack:
                     waitTime = 0;
@@ -62,6 +62,9 @@ namespace DAT.NPCTaisen
             switch (currentState)
             {
                 case State.Walk:
+                    aiActionParams.toEnemyInfo.Update(
+                        aiActionParams.myTransform.position,
+                        aiActionParams.enemyTransform.position);
                     UpdateWalk(move);
                     break;
 
@@ -77,15 +80,15 @@ namespace DAT.NPCTaisen
         /// <param name="move"></param>
         void UpdateWalk(IMovable move)
         {
-            if (!decideAttackAction.TryAttackAndMove(move, aiActionParams, attackActions))
-            {
-                // 歩きを実行
-                decideMoveAction.DecideAndAction(move, aiActionParams);
-            }
-            else
+            if (decideAttackAction.TryAttackAndMove(move, aiActionParams, attackActions))
             {
                 // 攻撃開始
                 nextState = State.Attack;
+            }
+            else
+            {
+                // 歩きを実行
+                decideMoveAction.DecideAndAction(move, aiActionParams);
             }
         }
 
