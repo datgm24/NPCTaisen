@@ -9,8 +9,6 @@ namespace DAT.NPCTaisen
     /// </summary>
     public class InputToAction1P : InputToActionBase, ITaisenInput
     {
-        public InputToAction1P(IAttackActionListener listener) : base(listener) { }
-
         public override void InputToAction(IMovable move, IAttackActionable[] attacks)
         {
             Vector2 inputMove = Vector2.zero;

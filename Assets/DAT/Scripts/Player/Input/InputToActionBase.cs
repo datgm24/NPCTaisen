@@ -9,16 +9,6 @@ namespace DAT.NPCTaisen
     /// </summary>
     public abstract class InputToActionBase : ITaisenInput
     {
-        /// <summary>
-        /// 攻撃するときに、コントローラーに知らせるためのインスタンス
-        /// </summary>
-        protected IAttackActionListener attackActionListener;
-
-        public InputToActionBase(IAttackActionListener listener)
-        {
-            attackActionListener = listener;
-        }
-
         public abstract void InputToAction(IMovable move, IAttackActionable[] attacks);
     }
 }

@@ -26,7 +26,7 @@ namespace DAT.NPCTaisen
         float waitTime;
         AttackActionBase[] attackActions;
 
-        public AIAction(IAttackActionListener listener, AIActionParams aiParams, AttackActionBase[] attacks) : base(listener)
+        public AIAction(AIActionParams aiParams, AttackActionBase[] attacks)
         {
             aiActionParams = aiParams;
             decideMoveAction = new(aiParams.decideActionParams.moveParams);

@@ -32,7 +32,7 @@ namespace DAT.NPCTaisen
         }
 
         [SerializeField]
-        ControlType controlType =ControlType.P1;
+        ControlType controlType = ControlType.P1;
 
         [SerializeField]
         string playerName = "";
@@ -41,7 +41,7 @@ namespace DAT.NPCTaisen
         DecideActionParams decideActionParams;
 
         [SerializeField, Tooltip("攻撃アクションを2つ設定する。")]
-        AttackActionBase [] attackActions = new AttackActionBase[2];
+        AttackActionBase[] attackActions = new AttackActionBase[2];
 
         [SerializeField, Tooltip("攻撃色")]
         Color attackColor = Color.white;
@@ -75,9 +75,9 @@ namespace DAT.NPCTaisen
             AIActionParams aiParams = new(decideActionParams, transform, attackActions);
             inputs = new ITaisenInput[]
             {
-                new InputToAction1P(this),
-                new InputToAction2P(this),
-                new AIAction(this, aiParams, attackActions),
+                new InputToAction1P(),
+                new InputToAction2P(),
+                new AIAction(aiParams, attackActions),
             };
             for (int i = 0; i < attackActions.Length; i++)
             {
