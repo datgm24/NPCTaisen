@@ -7,7 +7,7 @@ namespace DAT.NPCTaisen
     /// <summary>
     /// 行動の得点を集計して、行動を決めるベースクラス
     /// </summary>
-    public class DecideActionBase : MonoBehaviour, IDecideAction
+    public class DecideActionBase : IDecideAction
     {
         float[] points;
 
