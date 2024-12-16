@@ -39,10 +39,18 @@ namespace DAT.NPCTaisen
             {
                 // 各方向の情報を計算
                 var detector = aiActionParams.attackedDetector.AttackedTransforms[i];
-                if (!toTargetInfo.Update(aiActionParams.myTransform.position, detector.position))
+                if (detector == null)
                 {
+                    Debug.Log($"  Detector null");
                     continue;
                 }
+                if (!toTargetInfo.Update(aiActionParams.myTransform.position, detector.position))
+                {
+                    Debug.Log($"  TooNear");
+                    continue;
+                }
+
+                Debug.Log($"  Score {i}");
 
                 // 対象に対して、垂直に近づくベクトル
                 var nearOrthogonalDirection = toTargetInfo.GetOrthogonalNearDirection();
@@ -63,10 +71,6 @@ namespace DAT.NPCTaisen
                     if (j == (int)farOrthogonalDirection)
                     {
                         scores[j + 1] += MaxPoint / (float)count;
-                        if (j != 0)
-                        {
-                            Debug.Log($"not 0");
-                        }
                         continue;
                     }
 
@@ -83,6 +87,8 @@ namespace DAT.NPCTaisen
                     }
                 }
             }
+
+            aiActionParams.attackedDetector.Clear();
         }
     }
 }

@@ -77,25 +77,26 @@ namespace DAT.NPCTaisen
             // 敵からの理想距離
             ClearScores();
             ScoreWithEnemyDistance.Score(ref scores, aiActionParams.myTransform.position, aiActionParams.enemyTransform.position, decideMoveParams.fromEnemyDistance);
-            // AddScores(decideMoveParams.fromEnemyWeight);
+            AddScores(decideMoveParams.fromEnemyWeight);
 
             // 攻撃の採点
             for (int i = 0; i < aiActionParams.attackScoring.Length; i++)
             {
                 aiActionParams.attackScoring[i].ScoreMove(ref scores, aiActionParams);
-                //AddScores(decideMoveParams.attackWeight);
+                AddScores(decideMoveParams.attackWeight);
             }
 
             // 敵の弾の回避を採点
             scoreMoveWithEnemyAttack.ScoreMove(ref scores, aiActionParams);
-            for (int i = 0; i < scores.Length; i++)
+            AddScores(decideMoveParams.escapeEnemyAttackWeight);
+
+            for (int i = 0; i < Points.Length; i++)
             {
-                if (scores[i] > 0.01f)
+                if (Points[i] > 0.01f)
                 {
-                    Debug.Log($"{i}:{scores[i]}");
+                    Debug.Log($"{i}:{Points[i]}");
                 }
             }
-            AddScores(decideMoveParams.escapeEnemyAttackWeight);
 
             // 移動実行
             move.Move(MoveVector[Decision]);

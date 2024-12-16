@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+#define USE_THIS
 
 namespace DAT.NPCTaisen
 {
@@ -31,7 +29,7 @@ namespace DAT.NPCTaisen
         /// <returns>攻撃を開始するならtrue</returns>
         public bool TryAttackAndMove(IMovable move, AIActionParams aiActionParams, AttackActionBase[] attacks)
         {
-            /*
+#if USE_THIS
             for (int i = 0; i < attacks.Length; i++)
             {
                 var decision = attacks[i].TryAttack(aiActionParams);
@@ -42,7 +40,8 @@ namespace DAT.NPCTaisen
                     return true;
                 }
             }
-            */
+#endif
+
             return false;
         }
 

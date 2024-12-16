@@ -34,11 +34,15 @@ namespace DAT.NPCTaisen
         {
             var attack = other.GetComponentInParent<AttackBase>();
 
+            Debug.Log($"trigger {attack}");
+
             // 攻撃ではないか、オーナーなら何もしない
             if ((attack == null) || (attack.IsOwner(ownerName)))
             {
                 return;
             }
+
+            Debug.Log($"  add");
 
             AttackedTransforms.Add(other.transform);
         }

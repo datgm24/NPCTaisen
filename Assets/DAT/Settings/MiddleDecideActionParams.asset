@@ -16,7 +16,7 @@ MonoBehaviour:
     fromEnemyDistance: 10
     fromEnemyWeight: 1
     attackWeight: 1.1
-    escapeEnemyAttackWeight: 3
+    escapeEnemyAttackWeight: 10
     enemyFreezeAttackWeight: 1
   attackParams:
     meleeAttackWeight: 1
