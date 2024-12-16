@@ -46,16 +46,9 @@ namespace DAT.NPCTaisen
             // 敵がいる方向に一番近い方向をmaxIndexに求める
             Direction.Index maxIndex = aiActionParams.toEnemyInfo.GetMaxDotDirection();
 
-            // 直交するインデックスを得る
-            Direction.Index sideIndex = Direction.GetOrthogonalIndex(maxIndex);
-
-            // 敵がいる側に設定
-            float side2dot = aiActionParams.toEnemyInfo.GetDot(sideIndex);
-            if (side2dot < 0)
-            {
-                sideIndex = Direction.GetReverseIndex(sideIndex);
-            }
-            Vector3 sideVector = Direction.Vector[(int)sideIndex];
+            // 直交するうち、近づく方向のインデックスを得る
+            Direction.Index nearOrthogonalIndex = aiActionParams.toEnemyInfo.GetOrthogonalNearDirection();
+            Vector3 sideVector = Direction.Vector[(int)nearOrthogonalIndex];
 
             // 自分から敵へのベクトルに直交するベクトルを求める
             Vector3 toEnemy = aiActionParams.enemyTransform.position - aiActionParams.myTransform.position;

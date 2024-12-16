@@ -54,6 +54,11 @@ namespace DAT.NPCTaisen
         /// </summary>
         float[] scores = new float[System.Enum.GetValues(typeof(ActionType)).Length];
 
+        /// <summary>
+        /// 敵の弾から、移動を採点する。
+        /// </summary>
+        ScoreMoveWithEnemyAttack scoreMoveWithEnemyAttack = new();
+
         public DecideMoveAction(DecideMoveParams moveParams)
         {
             this.decideMoveParams = moveParams;
@@ -71,15 +76,26 @@ namespace DAT.NPCTaisen
 
             // 敵からの理想距離
             ClearScores();
-            ScoreFromEnemyDistance.Score(ref scores, aiActionParams.myTransform.position, aiActionParams.enemyTransform.position, decideMoveParams.fromEnemyDistance);
-            AddScores(decideMoveParams.fromEnemyWeight);
+            ScoreWithEnemyDistance.Score(ref scores, aiActionParams.myTransform.position, aiActionParams.enemyTransform.position, decideMoveParams.fromEnemyDistance);
+            // AddScores(decideMoveParams.fromEnemyWeight);
 
             // 攻撃の採点
             for (int i = 0; i < aiActionParams.attackScoring.Length; i++)
             {
                 aiActionParams.attackScoring[i].ScoreMove(ref scores, aiActionParams);
-                AddScores(decideMoveParams.attackWeight);
+                //AddScores(decideMoveParams.attackWeight);
             }
+
+            // 敵の弾の回避を採点
+            scoreMoveWithEnemyAttack.ScoreMove(ref scores, aiActionParams);
+            for (int i = 0; i < scores.Length; i++)
+            {
+                if (scores[i] > 0.01f)
+                {
+                    Debug.Log($"{i}:{scores[i]}");
+                }
+            }
+            AddScores(decideMoveParams.escapeEnemyAttackWeight);
 
             // 移動実行
             move.Move(MoveVector[Decision]);

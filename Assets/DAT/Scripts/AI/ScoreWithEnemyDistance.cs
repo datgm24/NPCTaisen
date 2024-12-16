@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DAT.NPCTaisen
 {
-    public static class ScoreFromEnemyDistance
+    public static class ScoreWithEnemyDistance
     {
         /// <summary>
         /// 理想距離にいるとみなす距離
@@ -40,7 +40,7 @@ namespace DAT.NPCTaisen
             for (int i = 1; i < scores.Length; i++)
             {
                 float angle = Mathf.Abs(Vector3.SignedAngle(toTarget, DecideMoveAction.ActionVector[i], Vector3.up));
-                Debug.Log($"toTarget={toTarget} [{i}]={angle} actionVector={DecideMoveAction.ActionVector[i]}");
+                //Debug.Log($"toTarget={toTarget} [{i}]={angle} actionVector={DecideMoveAction.ActionVector[i]}");
                 // angle   score
                 // 0       1
                 // 90      0

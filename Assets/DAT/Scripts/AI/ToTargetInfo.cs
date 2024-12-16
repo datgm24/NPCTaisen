@@ -7,7 +7,7 @@ namespace DAT.NPCTaisen
     /// <summary>
     /// 敵に関する情報を収集して、取り出せる情報クラス
     /// </summary>
-    public class ToEnemyInfo
+    public class ToTargetInfo
     {
         /// <summary>
         /// 距離が近いと判断するデフォルト値
@@ -91,6 +91,30 @@ namespace DAT.NPCTaisen
             }
 
             return (Direction.Index)maxIndex;
+        }
+
+        /// <summary>
+        /// 最寄り方向に直交するベクトルで、近づく方向のベクトルを返す。
+        /// </summary>
+        /// <returns>ターゲットがある方向に対して、直交するうちの近づく方のベクトルを返す。</returns>
+        public Direction.Index GetOrthogonalNearDirection()
+        {
+            if (IsTooNear)
+            {
+                return Direction.Index.None;
+            }
+
+            // 直交するうち、近づく方向のインデックスを得る
+            var maxIndex = GetMaxDotDirection();
+            Direction.Index nearOrthogonalIndex = Direction.GetOrthogonalIndex(maxIndex);
+
+            // 敵がいる側に設定
+            float side2dot = GetDot(nearOrthogonalIndex);
+            if (side2dot >= 0)
+            {
+                return nearOrthogonalIndex;
+            }
+            return Direction.GetReverseIndex(nearOrthogonalIndex);
         }
 
         /// <summary>

@@ -10,19 +10,21 @@ namespace DAT.NPCTaisen
         public DecideActionParams decideActionParams;
         public Transform myTransform;
         public Transform enemyTransform;
-        public ToEnemyInfo toEnemyInfo = new();
+        public ToTargetInfo toEnemyInfo = new();
+        public AttackedDetector attackedDetector;
 
         /// <summary>
         /// 攻撃の採点処理のインスタンス2つ分。
         /// </summary>
         public IScoreMove[] attackScoring = new IScoreMove[2];
 
-        public AIActionParams(DecideActionParams decideActionParams, Transform myTransform, IScoreMove[] attackScoring)
+        public AIActionParams(DecideActionParams decideActionParams, Transform myTransform, IScoreMove[] attackScoring, AttackedDetector attackedDetector)
         {
             this.decideActionParams = decideActionParams;
             this.myTransform = myTransform;
             this.attackScoring = attackScoring;
             FindTransforms(myTransform);
+            this.attackedDetector = attackedDetector;
         }
 
         public void FindTransforms(Transform myTransform)

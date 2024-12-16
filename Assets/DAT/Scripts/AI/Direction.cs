@@ -62,8 +62,7 @@ namespace DAT.NPCTaisen
         /// <returns>90度進めたインデックス</returns>
         public static Index GetOrthogonalIndex(Index index)
         {
-            int degree90 = ((int)index + 2) % Count;
-            return (Index)degree90;
+            return GetIndex(index, 2);
         }
 
         /// <summary>
@@ -73,8 +72,30 @@ namespace DAT.NPCTaisen
         /// <returns>反転させたインデックス</returns>
         public static Index GetReverseIndex(Index index)
         {
-            int reverse = ((int)index + 4) % Count;
-            return (Index)reverse;
+            return GetIndex(index, 4);
+        }
+
+        /// <summary>
+        /// 指定のインデックスに、指定の値を足したときのインデックス値を返す。
+        /// </summary>
+        /// <param name="source">元のインデックス</param>
+        /// <param name="add">加算値</param>
+        /// <returns>加算後のインデックス</returns>
+        public static Index GetIndex(Index source, int add)
+        {
+            if (add >= 0)
+            {
+                int plus = ((int)source + add) % Count;
+                return (Index)plus;
+            }
+
+            // マイナス
+            int minus = (int)source + add;
+            while (minus < 0)
+            {
+                minus += Count;
+            }
+            return (Index)minus;
         }
     }
 }

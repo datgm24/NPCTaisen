@@ -28,7 +28,7 @@ namespace DAT.NPCTaisen
 
         public override void ScoreMove(ref float[] scores, AIActionParams aiActionParams)
         {
-            Debug.Log($"近距離攻撃をあてようとする移動採点");
+            //Debug.Log($"近距離攻撃をあてようとする移動採点");
         }
 
         public override DecideMoveAction.ActionType TryAttack(AIActionParams aiActionParams)
