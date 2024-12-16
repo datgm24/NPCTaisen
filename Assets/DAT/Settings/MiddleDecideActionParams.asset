@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf5810e29d886494db9e3ae3bbc041e6, type: 3}
-  m_Name: EscapeDecideActionParams
+  m_Name: MiddleDecideActionParams
   m_EditorClassIdentifier: 
   moveParams:
     attackWeight: 1.1
