@@ -1392,6 +1392,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1012352080475108820, guid: b3c57766d215f4a4786a78d5fad1c599, type: 3}
+      propertyPath: attackDegree
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4898089988779983604, guid: b3c57766d215f4a4786a78d5fad1c599, type: 3}
       propertyPath: m_Mesh
       value: 

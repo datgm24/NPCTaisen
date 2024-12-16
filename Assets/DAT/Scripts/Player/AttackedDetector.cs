@@ -30,10 +30,8 @@ namespace DAT.NPCTaisen
             AttackedTransforms.Clear();
         }
 
-        private void OnTriggerEnter(Collider other)
+        public void Attack(AttackBase attack)
         {
-            var attack = other.GetComponentInParent<AttackBase>();
-
             Debug.Log($"trigger {attack}");
 
             // 攻撃ではないか、オーナーなら何もしない
@@ -44,7 +42,11 @@ namespace DAT.NPCTaisen
 
             Debug.Log($"  add");
 
-            AttackedTransforms.Add(other.transform);
+            AttackedTransforms.Add(attack.transform);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
         }
 
         private void OnTriggerStay(Collider other)
