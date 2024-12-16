@@ -63,6 +63,10 @@ namespace DAT.NPCTaisen
                     if (j == (int)farOrthogonalDirection)
                     {
                         scores[j + 1] += MaxPoint / (float)count;
+                        if (j != 0)
+                        {
+                            Debug.Log($"not 0");
+                        }
                         continue;
                     }
 
