@@ -51,10 +51,6 @@ namespace DAT.NPCTaisen
 
             switch (currentState)
             {
-                case State.Walk:
-                    aiActionParams.attackedDetector.Clear();
-                    break;
-
                 case State.Attack:
                     waitTime = 0;
                     break;

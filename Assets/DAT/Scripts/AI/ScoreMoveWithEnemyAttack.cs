@@ -34,7 +34,8 @@ namespace DAT.NPCTaisen
                 scores[i] = 0;
             }
 
-            int count = aiActionParams.attackedDetector.AttackedTransforms.Count;
+            // 敵の攻撃を検出する
+            int count = aiActionParams.attackedDetector.Detect();
             for (int i = 0; i < count; i++)
             {
                 // 各方向の情報を計算
@@ -91,8 +92,6 @@ namespace DAT.NPCTaisen
                     }
                 }
             }
-
-            aiActionParams.attackedDetector.Clear();
         }
     }
 }

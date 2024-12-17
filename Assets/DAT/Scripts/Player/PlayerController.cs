@@ -72,8 +72,7 @@ namespace DAT.NPCTaisen
         {
             moveable = GetComponent<IMovable>();
             animator = GetComponent<Animator>();
-            var attackedDetector = GetComponentInChildren<AttackedDetector>();
-            attackedDetector.SetOwnerName(playerName);
+            var attackedDetector = new AttackedDetector(playerName, GetComponent<CapsuleCollider>());
             AIActionParams aiParams = new(decideActionParams, transform, attackActions, attackedDetector);
             inputs = new ITaisenInput[]
             {
