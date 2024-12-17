@@ -17,3 +17,8 @@ NPC対戦サンプル
 5. ProjectメニューのDAT/Scenesフォルダーから、GamePlayシーンを開く
 
 以上で、Playできます。
+
+## License
+
+- Mplus1Code. [SIL OPEN FONT LICENSE Version 1.1](https://github.com/datgm24/NPCTaisen/blob/main/Assets/MPLUS_FONTS/OFL.txt)
+- DATフォルダー内. [MIT License](LICENSE.md)
