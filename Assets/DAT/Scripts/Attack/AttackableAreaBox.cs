@@ -23,19 +23,14 @@ namespace DAT.NPCTaisen
 
         void FixedUpdate()
         {
-            Debug.Log($"cast {boxCollider.bounds.center}, {boxCollider.size} ");
-
             var count = Physics.OverlapBoxNonAlloc(
                 boxCollider.bounds.center, boxCollider.size * 0.5f, colliders,
                 boxCollider.transform.rotation, attackDetector, QueryTriggerInteraction.Collide);
             if (count == 0) { return; }
 
-            Debug.Log($"count on");
-
             var detector = colliders[0].GetComponent<AttackedDetector>();
             if (detector == null) { return; }
 
-            Debug.Log($"call attack");
             detector.Attack(attackBase);
         }
     }

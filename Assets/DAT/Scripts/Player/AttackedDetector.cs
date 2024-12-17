@@ -30,28 +30,21 @@ namespace DAT.NPCTaisen
             AttackedTransforms.Clear();
         }
 
-        public void Attack(AttackBase attack)
+        /// <summary>
+        /// 攻撃を知らせる。攻撃だったら、trueを返す。
+        /// </summary>
+        /// <param name="attack">攻撃元のインスタンス</param>
+        /// <returns>敵の攻撃で、処理に登録したらtrue</returns>
+        public bool Attack(AttackBase attack)
         {
-            Debug.Log($"trigger {attack}");
-
             // 攻撃ではないか、オーナーなら何もしない
             if ((attack == null) || (attack.IsOwner(ownerName)))
             {
-                return;
+                return false;
             }
 
-            Debug.Log($"  add");
-
             AttackedTransforms.Add(attack.transform);
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-        }
-
-        private void OnTriggerStay(Collider other)
-        {
-            OnTriggerEnter(other);
+            return true;
         }
     }
 }
