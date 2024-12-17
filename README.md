@@ -2,6 +2,8 @@
 
 NPC対戦サンプル
 
+- [デモ版](https://datgm23.github.io/sotsusei/NPC/)
+
 ## 対象バージョン
 
 - Unity2021.3.4f1
