@@ -1,4 +1,4 @@
-//#define USE_THIS
+#define USE_THIS
 
 namespace DAT.NPCTaisen
 {

@@ -90,15 +90,6 @@ namespace DAT.NPCTaisen
             scoreMoveWithEnemyAttack.ScoreMove(ref scores, aiActionParams);
             AddScores(decideMoveParams.escapeEnemyAttackWeight);
 
-            for (int i = 1; i < Points.Length; i++)
-            {
-                if (Points[i] > 0.01f)
-                {
-                    Debug.Log($"{i}:{Points[i]}");
-                }
-            }
-            Debug.Log($"Dicision={Decision} {Time.frameCount}");
-
             // 移動実行
             move.Move(MoveVector[Decision]);
         }
