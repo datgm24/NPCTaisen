@@ -29,4 +29,4 @@ NPC対戦サンプル
 ## License
 
 - Mplus1Code. [SIL OPEN FONT LICENSE Version 1.1](https://github.com/datgm24/NPCTaisen/blob/main/Assets/MPLUS_FONTS/OFL.txt)
-- DATフォルダー内. [MIT License](LICENSE)
+- 自作素材は、Assets/DATフォルダー内。 [MIT License](LICENSE)
