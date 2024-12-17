@@ -26,12 +26,12 @@ namespace DAT.NPCTaisen
             return attackObject;
         }
 
-        public override void ScoreMove(ref float[] scores, Transform myTransform, Transform enemyTransform)
+        public override void ScoreMove(ref float[] scores, AIActionParams aiActionParams)
         {
-            Debug.Log($"近距離攻撃をあてようとする移動採点");
+            //Debug.Log($"近距離攻撃をあてようとする移動採点");
         }
 
-        public override DecideMoveAction.ActionType TryAttack(Transform myTransform, Transform enemyTransform)
+        public override DecideMoveAction.ActionType TryAttack(AIActionParams aiActionParams)
         {
             return DecideMoveAction.ActionType.Stop;
         }

@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace DAT.NPCTaisen
 {
-    public interface IScoreAttackWithTransform
+    public interface IScoreAttack
     {
         /// <summary>
         /// 自分と相手のTransformから、移動方向ごとのスコアを返す。
         /// </summary>
-        /// <param name="myTransform">自分のTransform</param>
-        /// <param name="enemyTransform">敵のTransform</param>
         /// <returns>Stopなら攻撃しない。それ以外は、その向きに攻撃</returns>
-        DecideMoveAction.ActionType TryAttack(Transform myTransform, Transform enemyTransform);
+        /// <param name="aiActionParams">AIの情報</param>
+        /// <returns>攻撃方向を返す。攻撃しないなら、Stop</returns>
+        DecideMoveAction.ActionType TryAttack(AIActionParams aiActionParams);
     }
 }

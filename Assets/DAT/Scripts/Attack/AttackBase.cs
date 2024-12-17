@@ -18,6 +18,8 @@ namespace DAT.NPCTaisen
         protected Color attackColor;
         MeshRenderer meshRenderer;
 
+        public bool IsOwner(string checkName) => ownerName == checkName;
+
         /// <summary>
         /// アルファ値を反映させる。
         /// </summary>
@@ -44,13 +46,9 @@ namespace DAT.NPCTaisen
             {
                 if (damageable.Damage(ownerName))
                 {
+                    // ぶつかったときに呼び出す
                     OnHit(other);
                 }
-            }
-            else
-            {
-                // IDamageableがなければ、その他のオブジェクトなので、OnHitを呼び出す
-                OnHit(other);
             }
         }
 

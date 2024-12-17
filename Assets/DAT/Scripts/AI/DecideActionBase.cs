@@ -7,21 +7,21 @@ namespace DAT.NPCTaisen
     /// <summary>
     /// 行動の得点を集計して、行動を決めるベースクラス
     /// </summary>
-    public class DecideActionBase : MonoBehaviour, IDecideAction
+    public class DecideActionBase : IDecideAction
     {
-        float[] points;
+        public float[] Points { get; private set; }
 
         public int Decision
         {
             get
             {
                 int index = 0;
-                float max = points[index];
-                for (int i = 1; i < points.Length; i++)
+                float max = Points[index];
+                for (int i = 1; i < Points.Length; i++)
                 {
-                    if (points[i] > max)
+                    if (Points[i] > max)
                     {
-                        max = points[i];
+                        max = Points[i];
                         index = i;
                     }
                 }
@@ -33,36 +33,36 @@ namespace DAT.NPCTaisen
         public void AddPoint(int index, float point)
         {
             // 初期化前なら何もしない
-            if (points == null)
+            if (Points == null)
             {
                 return;
             }
 
             // インデックスが無効なら、何もしない
-            if ((index < 0) || (index >= points.Length))
+            if ((index < 0) || (index >= Points.Length))
             {
                 return;
             }
 
-            points[index] += point;
+            Points[index] += point;
         }
 
         public void Clear()
         {
-            if (points == null)
+            if (Points == null)
             {
                 return;
             }
 
-            for (int i = 0; i < points.Length; i++)
+            for (int i = 0; i < Points.Length; i++)
             {
-                points[i] = 0;
+                Points[i] = 0;
             }
         }
 
         public void Init(int count)
         {
-            points = new float[count];
+            Points = new float[count];
             Clear();
         }
     }

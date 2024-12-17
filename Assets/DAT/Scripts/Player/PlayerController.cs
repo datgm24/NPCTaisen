@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TreeEditor;
 using UnityEngine;
 
 namespace DAT.NPCTaisen
@@ -32,7 +29,7 @@ namespace DAT.NPCTaisen
         }
 
         [SerializeField]
-        ControlType controlType =ControlType.P1;
+        ControlType controlType = ControlType.P1;
 
         [SerializeField]
         string playerName = "";
@@ -41,7 +38,7 @@ namespace DAT.NPCTaisen
         DecideActionParams decideActionParams;
 
         [SerializeField, Tooltip("攻撃アクションを2つ設定する。")]
-        AttackActionBase [] attackActions = new AttackActionBase[2];
+        AttackActionBase[] attackActions = new AttackActionBase[2];
 
         [SerializeField, Tooltip("攻撃色")]
         Color attackColor = Color.white;
@@ -72,12 +69,13 @@ namespace DAT.NPCTaisen
         {
             moveable = GetComponent<IMovable>();
             animator = GetComponent<Animator>();
-            AIActionParams aiParams = new(decideActionParams, transform, attackActions);
+            var attackedDetector = new AttackedDetector(playerName, GetComponent<CapsuleCollider>());
+            AIActionParams aiParams = new(decideActionParams, transform, attackActions, attackedDetector);
             inputs = new ITaisenInput[]
             {
-                new InputToAction1P(this),
-                new InputToAction2P(this),
-                new AIAction(this, aiParams, attackActions),
+                new InputToAction1P(),
+                new InputToAction2P(),
+                new AIAction(aiParams, attackActions),
             };
             for (int i = 0; i < attackActions.Length; i++)
             {
@@ -96,6 +94,11 @@ namespace DAT.NPCTaisen
         {
             InitState();
             UpdateState();
+        }
+
+        void FixedUpdate()
+        {
+            FixedUpdateState();
         }
 
         /// <summary>
@@ -175,7 +178,7 @@ namespace DAT.NPCTaisen
             switch (currentState)
             {
                 case State.Move:
-                    UpdateMove();
+                    inputs[(int)controlType].UpdateInput();
                     break;
             }
 
@@ -186,13 +189,21 @@ namespace DAT.NPCTaisen
             }
         }
 
-        /// <summary>
-        /// 操作の更新処理
-        /// </summary>
-        void UpdateMove()
+        void FixedUpdateState()
         {
-            // 入力からアクションを実行させる
-            inputs[(int)controlType].InputToAction(moveable, attackActions);
+            switch (currentState)
+            {
+                // 入力からアクションを実行させる
+                case State.Move:
+                    inputs[(int)controlType].InputToAction(moveable, attackActions);
+                    break;
+            }
+
+            // 攻撃の更新
+            for (int i = 0; i < attackActions.Length; i++)
+            {
+                attackActions[i].Update();
+            }
         }
 
         public void OnAttacking(IAttackActionable attack)
