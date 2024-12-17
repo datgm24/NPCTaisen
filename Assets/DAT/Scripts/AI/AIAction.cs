@@ -112,5 +112,10 @@ namespace DAT.NPCTaisen
             decideAttackAction.BeginAttack();
             nextState = State.Walk;
         }
+
+        public override void UpdateInput()
+        {
+        }
+
     }
 }

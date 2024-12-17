@@ -100,6 +100,11 @@ namespace DAT.NPCTaisen
             UpdateState();
         }
 
+        void FixedUpdate()
+        {
+            FixedUpdateState();
+        }
+
         /// <summary>
         /// ゲームがはじまったら、GamePlayから、このメソッドを呼び出す。
         /// </summary>
@@ -177,7 +182,7 @@ namespace DAT.NPCTaisen
             switch (currentState)
             {
                 case State.Move:
-                    UpdateMove();
+                    inputs[(int)controlType].UpdateInput();
                     break;
             }
 
@@ -188,13 +193,21 @@ namespace DAT.NPCTaisen
             }
         }
 
-        /// <summary>
-        /// 操作の更新処理
-        /// </summary>
-        void UpdateMove()
+        void FixedUpdateState()
         {
-            // 入力からアクションを実行させる
-            inputs[(int)controlType].InputToAction(moveable, attackActions);
+            switch (currentState)
+            {
+                // 入力からアクションを実行させる
+                case State.Move:
+                    inputs[(int)controlType].InputToAction(moveable, attackActions);
+                    break;
+            }
+
+            // 攻撃の更新
+            for (int i = 0; i < attackActions.Length; i++)
+            {
+                attackActions[i].Update();
+            }
         }
 
         public void OnAttacking(IAttackActionable attack)

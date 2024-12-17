@@ -9,21 +9,19 @@ namespace DAT.NPCTaisen
     /// </summary>
     public class InputToAction2P : InputToActionBase, ITaisenInput
     {
-        public override void InputToAction(IMovable move, IAttackActionable[] attacks)
+        public override void UpdateInput()
         {
-            Vector2 inputMove = Vector2.zero;
+            inputMove = Vector2.zero;
             inputMove.x = Input.GetAxisRaw("Horizontal2P");
             inputMove.y = Input.GetAxisRaw("Vertical2P");
-            move.Move(inputMove);
 
-            if (Input.GetButtonDown("Melee2P"))
-            {
-                attacks[0].Attack();
-            }
-            if (Input.GetButtonDown("Range2P"))
-            {
-                attacks[1].Attack();
-            }
+            attackInputs[0] |= Input.GetButtonDown("Melee2P");
+            attackInputs[1] |= Input.GetButtonDown("Range2P");
+        }
+
+        public override void InputToAction(IMovable move, IAttackActionable[] attacks)
+        {
+            HumanInputToAction(move, attacks);
         }
     }
 }

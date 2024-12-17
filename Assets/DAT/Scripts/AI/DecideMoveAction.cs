@@ -97,6 +97,7 @@ namespace DAT.NPCTaisen
                     Debug.Log($"{i}:{Points[i]}");
                 }
             }
+            Debug.Log($"Dicision={Decision} {Time.frameCount}");
 
             // 移動実行
             move.Move(MoveVector[Decision]);

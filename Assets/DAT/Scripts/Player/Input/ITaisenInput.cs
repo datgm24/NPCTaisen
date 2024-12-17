@@ -10,7 +10,14 @@ namespace DAT.NPCTaisen
     public interface ITaisenInput
     {
         /// <summary>
-        /// 入力やAIの判断から、行動を呼び出す。
+        /// 入力をデバイスから読み取って、記録する。
+        /// Updateから呼び出す。
+        /// </summary>
+        void UpdateInput();
+
+        /// <summary>
+        /// 記録した入力やAIの判断から、行動を呼び出す。
+        /// FixedUpdateから呼び出す。
         /// </summary>
         void InputToAction(IMovable move, IAttackActionable[] attacks);
     }
