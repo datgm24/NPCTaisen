@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,44 +6,52 @@ namespace DAT.NPCTaisen
     /// <summary>
     /// 敵の攻撃をリストアップする。
     /// </summary>
-    public class AttackedDetector : MonoBehaviour
+    public class AttackedDetector
     {
         static int DefaultAttackedCount => 8;
+
         /// <summary>
-        /// 
+        /// 敵の攻撃オブジェクトのTransformリスト
         /// </summary>
         public readonly List<Transform> AttackedTransforms = new List<Transform>(DefaultAttackedCount);
-        string ownerName;
 
-        /// <summary>
-        /// オーナー名を設定する。
-        /// </summary>
-        /// <param name="owner">オーナーの名前</param>
-        public void SetOwnerName(string owner)
+        string ownerName;
+        CapsuleCollider capsuleCollider;
+
+        Collider[] colliders = new Collider[DefaultAttackedCount];
+        int attackableAreaLayer;
+
+        public AttackedDetector(string owner, CapsuleCollider capsule)
         {
             ownerName = owner;
+            capsuleCollider = capsule;
+            attackableAreaLayer = LayerMask.GetMask("AttackableArea");
         }
 
-        public void Clear()
-        {
-            AttackedTransforms.Clear();
-        }
 
         /// <summary>
-        /// 攻撃を知らせる。攻撃だったら、trueを返す。
+        /// 敵の弾の検出とリストアップ
         /// </summary>
-        /// <param name="attack">攻撃元のインスタンス</param>
-        /// <returns>敵の攻撃で、処理に登録したらtrue</returns>
-        public bool Attack(AttackBase attack)
+        /// <returns>検出した敵の弾の数</returns>
+        public int Detect()
         {
-            // 攻撃ではないか、オーナーなら何もしない
-            if ((attack == null) || (attack.IsOwner(ownerName)))
+            int count = Physics.OverlapSphereNonAlloc(
+                capsuleCollider.bounds.center, capsuleCollider.radius, colliders, attackableAreaLayer, QueryTriggerInteraction.Collide);
+
+            AttackedTransforms.Clear();
+            for (int i=0;i<count;i++)
             {
-                return false;
+                var attack = colliders[i].GetComponentInParent<AttackBase>();
+                // 攻撃主が自分なら対象から外す
+                if (attack.IsOwner(ownerName))
+                {
+                    continue;
+                }
+
+                AttackedTransforms.Add(attack.transform);
             }
 
-            AttackedTransforms.Add(attack.transform);
-            return true;
+            return AttackedTransforms.Count;
         }
     }
 }
