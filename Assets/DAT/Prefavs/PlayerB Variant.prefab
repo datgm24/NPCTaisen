@@ -85,7 +85,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9123851920434109920, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}
       propertyPath: controlType
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9123851920434109920, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}
       propertyPath: attackColor.b

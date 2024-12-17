@@ -84,6 +84,14 @@ namespace DAT.NPCTaisen
         /// <param name="move"></param>
         void UpdateWalk(IMovable move)
         {
+            if (decideMoveAction.Decide(aiActionParams))
+            {
+                // 敵の攻撃の脅威があるので、歩きを実行
+                decideMoveAction.Move(move);
+                return;
+            }
+
+            // 脅威はないので、攻撃を試す
             if (decideAttackAction.TryAttackAndMove(move, aiActionParams, attackActions))
             {
                 // 攻撃開始
@@ -92,7 +100,7 @@ namespace DAT.NPCTaisen
             else
             {
                 // 歩きを実行
-                decideMoveAction.DecideAndAction(move, aiActionParams);
+                decideMoveAction.Move(move);
             }
         }
 

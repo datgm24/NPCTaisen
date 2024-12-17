@@ -66,13 +66,22 @@ namespace DAT.NPCTaisen
         }
 
         /// <summary>
-        /// 判定と行動。
+        /// 移動方向の検討。弾の脅威があれば、trueを返す。
         /// </summary>
-        /// <param name="move">移動のためのインターフェース</param>
-        public void DecideAndAction(IMovable move, AIActionParams aiActionParams)
+        /// <param name="aiActionParams">AI用パラメーター</param>
+        /// <returns>弾の脅威があれば、trueを返す。</returns>
+        public bool Decide(AIActionParams aiActionParams)
         {
-            // 加点
+            // スコアをクリア
             Clear();
+
+            // 敵の弾の回避を採点
+            scoreMoveWithEnemyAttack.ScoreMove(ref scores, aiActionParams);
+            if (AddScores(decideMoveParams.escapeEnemyAttackWeight))
+            {
+                // 敵の攻撃の脅威があるので、回避優先
+                return true;
+            }
 
             // 敵からの理想距離
             ClearScores();
@@ -86,11 +95,15 @@ namespace DAT.NPCTaisen
                 AddScores(decideMoveParams.attackWeight);
             }
 
-            // 敵の弾の回避を採点
-            scoreMoveWithEnemyAttack.ScoreMove(ref scores, aiActionParams);
-            AddScores(decideMoveParams.escapeEnemyAttackWeight);
+            return false;
+        }
 
-            // 移動実行
+        /// <summary>
+        /// 判定と行動。
+        /// </summary>
+        /// <param name="move">移動のためのインターフェース</param>
+        public void Move(IMovable move)
+        {
             move.Move(MoveVector[Decision]);
         }
 
@@ -98,13 +111,18 @@ namespace DAT.NPCTaisen
         /// 指定のウェイトに従って、scoresの値を、加点していく。
         /// </summary>
         /// <param name="weight">評価倍率</param>
-        void AddScores(float weight)
+        /// <returns>この処理で、スコアが加算されていたら、true</returns>
+        bool AddScores(float weight)
         {
+            bool isChanged = false;
             for (int i = 0; i < scores.Length; i++)
             {
                 AddPoint(i, weight * scores[i]);
+                isChanged |= (weight * scores[i] > 0);
                 scores[i] = 0;
             }
+
+            return isChanged;
         }
 
         /// <summary>
