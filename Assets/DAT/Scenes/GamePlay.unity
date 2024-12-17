@@ -1535,11 +1535,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9123851920434109920, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}
       propertyPath: controlType
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9123851920434109920, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}
       propertyPath: decideActionParams
       value: 
-      objectReference: {fileID: 11400000, guid: e50cdde8fce33491c8976fb975c3cbef, type: 2}
+      objectReference: {fileID: 11400000, guid: 0ed3334f9407a4288a227fc8964eedeb, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4081b41900204f4ebe4a23199b0da5a, type: 3}
