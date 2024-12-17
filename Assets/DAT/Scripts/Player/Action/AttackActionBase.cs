@@ -9,6 +9,9 @@ namespace DAT.NPCTaisen
         [SerializeField, Tooltip("プレイヤーの攻撃モーション")]
         PlayerAnimationState attackAnimation = PlayerAnimationState.MeleeAttack;
 
+        [SerializeField, Tooltip("攻撃の優先度")]
+        protected float priority = 1f;
+
         [SerializeField, Tooltip("次の攻撃ができるようになるまでの待機秒数")]
         float interval = 1f;
 

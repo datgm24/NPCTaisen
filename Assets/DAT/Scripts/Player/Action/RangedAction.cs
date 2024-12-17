@@ -80,6 +80,11 @@ namespace DAT.NPCTaisen
         /// <returns></returns>
         public override DecideMoveAction.ActionType TryAttack(AIActionParams aiActionParams)
         {
+            if (priority < 0.5f)
+            {
+                return DecideMoveAction.ActionType.Stop;
+            }
+
             // 近すぎたら何もしない
             if (aiActionParams.toEnemyInfo.IsTooNear)
             {
