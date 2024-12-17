@@ -41,22 +41,26 @@ namespace DAT.NPCTaisen
                 var detector = aiActionParams.attackedDetector.AttackedTransforms[i];
                 if (detector == null)
                 {
-                    Debug.Log($"  Detector null");
                     continue;
                 }
-                if (!toTargetInfo.Update(aiActionParams.myTransform.position, detector.position))
+
+                Vector3 toTarget = detector.transform.position - aiActionParams.myTransform.position;
+
+                // 攻撃の前方に対する垂直方向を求める
+                toTargetInfo.Update(Vector3.zero, detector.transform.forward);
+                var maxDir = toTargetInfo.GetMaxDotDirection();
+                var farOrthogonalDirection = Direction.GetIndex(maxDir, -2);
+                if (Vector3.Dot(Direction.Vector[(int)farOrthogonalDirection], toTarget) > 0)
                 {
-                    Debug.Log($"  TooNear");
-                    continue;
+                    // 正方向の時は、近づくので反転させる
+                    farOrthogonalDirection = Direction.GetReverseIndex(farOrthogonalDirection);
                 }
-
-                Debug.Log($"  Score {i}");
-
-                // 対象に対して、垂直に近づくベクトル
-                var nearOrthogonalDirection = toTargetInfo.GetOrthogonalNearDirection();
-                var farOrthogonalDirection = Direction.GetReverseIndex(nearOrthogonalDirection);
 
                 // 対象に近づく方向
+                if (!toTargetInfo.Update(aiActionParams.myTransform.position, detector.position))
+                {
+                    continue;
+                }
                 var nearDirection = toTargetInfo.GetMaxDotDirection();
                 // 遠ざかるベクトル
                 var farVector = -Direction.Vector[(int)nearDirection];
@@ -81,7 +85,7 @@ namespace DAT.NPCTaisen
                     }
 
                     // 遠ざかる方向の加点
-                    if(Vector3.Dot(farVector, Direction.Vector[j]) > 0)
+                    if (Vector3.Dot(farVector, Direction.Vector[j]) > 0)
                     {
                         scores[j + 1] += FarPoint / (float)count;
                     }
